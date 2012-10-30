@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+/**
+* fail
+* 
+* CLI for frontend spof detection
+*
+**/
+
+// dependencies
+var spof = require('../lib/spof.js'),
+	path = require('path'),
+	nopt = require('nopt');
+
+// Locals
+var options = {
+		"outputdir": path
+	},
+	shortHand = {
+		"o": ['--outputdir']
+	};
+
+// options
+options = nopt(options, shortHand);
+
+for(var key in options) {
+	console.log(options[key]);
+}

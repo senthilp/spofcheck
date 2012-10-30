@@ -1,7 +1,7 @@
 {
 	"name":"spof-check",
    	"description":"A CLI tool for detecting frontend SPOF",
-   	"version":"1.0",
+   	"version":"1.0.0",
    	"keywords":[
       	"SPOF",
       	"Frontend SPOF",
@@ -12,7 +12,7 @@
    	"contributors":[
    		"Senthil Padmanabhan",
    		"Venkat Sundramurthy"
-   	]
+   	],
    	"repository":{
     	"type":"git",
       	"url":"https://github.com/senthilp/spof-check"
@@ -24,9 +24,9 @@
       	}
    	],
    	"dependencies":{
-		
+		"nopt": "*"
    	},
    	"bin":{
-    	"hulk":"./bin/spof"
+    	"fail":"./bin/fail"
    	}
 }
