@@ -10,19 +10,96 @@
 // dependencies
 var spof = require('../lib/spof.js'),
 	path = require('path'),
-	nopt = require('nopt');
+	nopt = require('nopt'),
+	request = require('request'),
+	async = require('async'),
+	jsdom = require('jsdom').jsdom,
+	$ = require('jquery');
+
+// Setting jsdom global config
+require("jsdom").defaultDocumentFeatures = {
+	FetchExternalResources: false,
+	ProcessExternalResources: false,
+	MutationEvents: false,
+	QuerySelector: false
+};
 
 // Locals
 var options = {
-		"outputdir": path
+		"outputdir": path,
+		"help": String
 	},
 	shortHand = {
-		"o": ['--outputdir']
+		"o": ['--outputdir'],
+		"h": ['--help']
 	};
 
 // options
 options = nopt(options, shortHand);
 
-for(var key in options) {
-	console.log(options[key]);
+function getCssUrls($dom) {
+	// Retrieving the link elements, using both type and rel attributes 
+	var urls = [].concat($dom('link[type="text/css"]').get())
+				 .concat($dom('link[rel="stylesheet"]').get());
+	
+	// Retrieving the actual urls
+	urls = urls.map(function(url){
+		return url.href;
+	})
+	
+	// removing duplicates and returning
+	return urls.filter(function(url, index) {
+		return this.indexOf(url) == index;
+	}, urls);
 }
+
+function getCssFnStack(urls) {
+	var cssFnStack = [];
+	urls.forEach(function(url) {
+		cssFnStack.push(function(callback) {
+			request(url, function(error, response, body) {
+				if(error || response.statusCode != 200) {
+					body = '';
+				}
+				callback(null, body);
+			})
+		});
+	});
+	return cssFnStack;
+}
+
+function exec(args) {
+	var usage = '\n' +
+				'USAGE: fail http://www.xyz.com';
+	
+	if(!args.length || options.help) {
+		console.log(usage);
+		process.exit(0);
+	}
+
+	args.forEach(function(url){
+		// Check if http is present, else append it
+		url = /^http:\/\//.test(url) ? url: 'http://' + url;	 
+		request(url, function(error, response, body) {
+			if(!error && response.statusCode == 200) {				
+					// Create the DOM window from the page 
+				var win = jsdom(body, null, null).createWindow(),
+					// Get the jQuery DOM interface
+					$dom = $.create(win),
+					// Create the CSS function stack for the async parallelization
+					cssFnStack = getCssFnStack(getCssUrls($dom));
+				
+				// Retrieve the CSS results in parallel and join them
+				async.parallel(cssFnStack, function(err, results) {
+					var result = spof.analyze(body, results.join(), $dom);
+					// Build the output XML
+				});				
+			} else {
+				// TODO
+			}
+		});
+	});
+}
+
+// Start the execution
+exec(options.argv.remain);

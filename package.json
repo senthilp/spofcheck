@@ -24,7 +24,11 @@
       	}
    	],
    	"dependencies":{
-		"nopt": "*"
+		"nopt": "*",
+		"request": "*",
+		"async": "*",
+		"jsdom": "*",
+		"jquery": "1.7.2"
    	},
    	"bin":{
     	"fail":"./bin/fail"
