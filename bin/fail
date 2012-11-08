@@ -8,7 +8,8 @@
 **/
 
 // dependencies
-var spof = require('../lib/spof.js'),
+var spof = require('../lib/spof.js').spof,
+	rules = require('../lib/rules').rules,
 	path = require('path'),
 	nopt = require('nopt'),
 	request = require('request'),
@@ -76,7 +77,10 @@ function exec(args) {
 		console.log(usage);
 		process.exit(0);
 	}
-
+	
+	// Set the rules first
+	spof.setRules(rules);
+	
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http:\/\//.test(url) ? url: 'http://' + url;	 
@@ -91,7 +95,7 @@ function exec(args) {
 				
 				// Retrieve the CSS results in parallel and join them
 				async.parallel(cssFnStack, function(err, results) {
-					var result = spof.analyze(body, results.join(), $dom);
+					var result = spof.analyze($dom, results.join());
 					// Build the output XML
 				});				
 			} else {
