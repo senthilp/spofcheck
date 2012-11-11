@@ -76,6 +76,8 @@ function getCssFnStack(urls) {
 			request(url, function(error, response, body) {
 				if(error || response.statusCode != 200) {
 					body = '';
+				} else {
+					console.log('spof: ERROR Unable to load CSS resource '+ url + ' ...');
 				}
 				callback(null, body);
 			})
@@ -114,7 +116,7 @@ function exec(args) {
 		flush = function(results) {
 			var buffer = [],
 				output; 
-			console.log('Flushing the results ...\n');
+			console.log('spof: Flushing the results ...\n');
 			// Buffer the formatter start
 			output = formatter.startFormat();
 			output && buffer.push(output);
@@ -128,7 +130,7 @@ function exec(args) {
 			
 			// Flush the buffer
 			write(buffer.join('\n'));
-			console.log('\n\nSPOF check DONE!\n');
+			console.log('\n\nspof: SPOF check DONE!\n');
 		};
 	
 	if(!length || options.help) {
@@ -144,7 +146,7 @@ function exec(args) {
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http:\/\//.test(url) ? url: 'http://' + url;	
-		console.log('Analyzing ' + url + ' ...');
+		console.log('spof: Analyzing ' + url + ' ...');
 		request(url, function(error, response, body) {
 			if(!error && response.statusCode == 200) {				
 					// Create the DOM window from the page 
@@ -155,7 +157,7 @@ function exec(args) {
 					cssFnStack = getCssFnStack(getCssUrls($dom));
 				
 				// Retrieve the CSS results in parallel and join them
-				console.log('Processing external CSS resources for ' + url + ' ...');
+				console.log('spof: Processing external CSS resources for ' + url + ' ...');
 				async.parallel(cssFnStack, function(err, results) {
 					var result = spof.analyze($dom, results.join()),
 						formattedResults = formatter.formatResults(result, url);
@@ -171,7 +173,9 @@ function exec(args) {
 					}
 				});				
 			} else {
-				// TODO
+				// Decrement the length
+				length--;
+				console.log('spof: ERROR Unable to load '+ url + ' ...');
 			}
 		});
 	});
