@@ -7,7 +7,7 @@
       	"Frontend SPOF",
    	  	"SPOF Check"
    	],
-   	"main":"./lib/spof-check.js",
+   	"main":"./lib/spof.js",
    	"homepage":"https://github.com/senthilp/spof-check/blob/master/README.md",
    	"contributors":[
    		"Senthil Padmanabhan",

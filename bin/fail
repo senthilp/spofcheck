@@ -38,6 +38,12 @@ var options = {
 // options
 options = nopt(options, shortHand);
 
+/**
+ * Retrieve the list of external CSS URLs in the page 
+ * @param {Object} $dom The DOM handler (jQuery) for the page.
+ * @return {Array} An array of URLs. 
+ * @method getCssUrls
+ */
 function getCssUrls($dom) {
 	// Retrieving the link elements, using both type and rel attributes 
 	var urls = [].concat($dom('link[type="text/css"]').get())
@@ -54,6 +60,13 @@ function getCssUrls($dom) {
 	}, urls);
 }
 
+/**
+ * Creates a CSS callback function stack to be executed after each external
+ * CSS is loaded 
+ * @param {Array} urls The external CSS URLs
+ * @return {Array} An array of functions. 
+ * @method getCssFnStack
+ */
 function getCssFnStack(urls) {
 	var cssFnStack = [];
 	urls.forEach(function(url) {
@@ -69,6 +82,12 @@ function getCssFnStack(urls) {
 	return cssFnStack;
 }
 
+/**
+ * Creates a CSS callback function stack to be executed after each external
+ * CSS is loaded 
+ * @param {Array} args The arguments provided in command line 
+ * @method exec
+ */
 function exec(args) {
 	var usage = '\n' +
 				'USAGE: fail http://www.xyz.com';
@@ -78,8 +97,8 @@ function exec(args) {
 		process.exit(0);
 	}
 	
-	// Set the rules first
-	spof.setRules(rules);
+	// Register the rules first
+	spof.registerRules(rules);
 	
 	args.forEach(function(url){
 		// Check if http is present, else append it
@@ -96,7 +115,7 @@ function exec(args) {
 				// Retrieve the CSS results in parallel and join them
 				async.parallel(cssFnStack, function(err, results) {
 					var result = spof.analyze($dom, results.join());
-					// Build the output XML
+					console.log(url + " - Result: " + result.messages[0].message);
 				});				
 			} else {
 				// TODO
