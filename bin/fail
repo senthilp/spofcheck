@@ -9,8 +9,8 @@
 
 // dependencies
 var spof = require('../lib/spof.js').spof,
-	rules = require('../lib/rules').rules,
 	path = require('path'),
+	fs = require('fs'),
 	nopt = require('nopt'),
 	request = require('request'),
 	async = require('async'),
@@ -28,10 +28,12 @@ require("jsdom").defaultDocumentFeatures = {
 // Locals
 var options = {
 		"outputdir": path,
+		"format": String,
 		"help": String
 	},
 	shortHand = {
 		"o": ['--outputdir'],
+		"f": ['--format'],
 		"h": ['--help']
 	};
 
@@ -82,6 +84,14 @@ function getCssFnStack(urls) {
 	return cssFnStack;
 }
 
+function write(message) {
+	// TODO
+	var file = options.outputdir ? options.outputdir + '/junit.xml' : 1,
+		fd = fs.openSync(file, 'w');;
+	//console.log(file);
+	fs.writeSync(1, message);
+}
+
 /**
  * Creates a CSS callback function stack to be executed after each external
  * CSS is loaded 
@@ -90,19 +100,51 @@ function getCssFnStack(urls) {
  */
 function exec(args) {
 	var usage = '\n' +
-				'USAGE: fail http://www.xyz.com';
+				'USAGE: fail http://www.xyz.com',
+		formatter = spof.getFormatter(options.format || 'junit-xml'),
+		length = args.length,
+		counter = 0,
+		formattedResultsQ = [], // Queue to hold the formatted results
+		/**
+		 * Flush the spof results to a file 
+		 * @param {String} results The spof results to flush 
+		 * @method flush
+		 * @private
+		 */
+		flush = function(results) {
+			var buffer = [],
+				output; 
+			console.log('Flushing the results ...\n');
+			// Buffer the formatter start
+			output = formatter.startFormat();
+			output && buffer.push(output);
+			
+			// Buffer the results
+			results.length && buffer.push(results);
+			
+			// Buffer the formatter end
+			output = formatter.endFormat();
+			output && buffer.push(output);
+			
+			// Flush the buffer
+			write(buffer.join('\n'));
+			console.log('\n\nSPOF check DONE!\n');
+		};
 	
-	if(!args.length || options.help) {
+	if(!length || options.help) {
 		console.log(usage);
 		process.exit(0);
 	}
 	
-	// Register the rules first
-	spof.registerRules(rules);
-	
+	if(!formatter) {
+		console.log('spof:  Unknown format \'' + options.format + '\'. Cannot proceed');
+		process.exit(0);		
+	}
+		
 	args.forEach(function(url){
 		// Check if http is present, else append it
-		url = /^http:\/\//.test(url) ? url: 'http://' + url;	 
+		url = /^http:\/\//.test(url) ? url: 'http://' + url;	
+		console.log('Analyzing ' + url + ' ...');
 		request(url, function(error, response, body) {
 			if(!error && response.statusCode == 200) {				
 					// Create the DOM window from the page 
@@ -113,9 +155,20 @@ function exec(args) {
 					cssFnStack = getCssFnStack(getCssUrls($dom));
 				
 				// Retrieve the CSS results in parallel and join them
+				console.log('Processing external CSS resources for ' + url + ' ...');
 				async.parallel(cssFnStack, function(err, results) {
-					var result = spof.analyze($dom, results.join());
-					console.log(url + " - Result: " + result.messages[0].message);
+					var result = spof.analyze($dom, results.join()),
+						formattedResults = formatter.formatResults(result, url);
+
+					// Write the formatted results
+					if(formattedResults && formattedResults.length) {
+						formattedResultsQ.push(formattedResults);
+					}
+					
+					// Flush the results if last url
+					if(++counter === length) {
+						flush(formattedResultsQ.join('\n'));
+					}
 				});				
 			} else {
 				// TODO
