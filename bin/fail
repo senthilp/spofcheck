@@ -29,12 +29,16 @@ require("jsdom").defaultDocumentFeatures = {
 var options = {
 		"outputdir": path,
 		"format": String,
-		"help": String
+		"help": Boolean,
+		"print": Boolean,
+		"quiet": Boolean
 	},
 	shortHand = {
 		"o": ['--outputdir'],
 		"f": ['--format'],
-		"h": ['--help']
+		"h": ['--help'],
+		"p": ['--print'],
+		"q": ['--quiet']
 	};
 
 // options
@@ -76,8 +80,7 @@ function getCssFnStack(urls) {
 			request(url, function(error, response, body) {
 				if(error || response.statusCode != 200) {
 					body = '';
-				} else {
-					console.log('spof: ERROR Unable to load CSS resource '+ url + ' ...');
+					log('spof: ERROR Unable to load CSS resource '+ url);
 				}
 				callback(null, body);
 			})
@@ -86,12 +89,28 @@ function getCssFnStack(urls) {
 	return cssFnStack;
 }
 
-function write(message) {
-	// TODO
-	var file = options.outputdir ? options.outputdir + '/junit.xml' : 1,
-		fd = fs.openSync(file, 'w');;
-	//console.log(file);
-	fs.writeSync(1, message);
+/**
+ * Wrapper for console.log, checks for quiet mode first
+ * @param {String} message The message to be logged 
+ * @method log
+ */
+function log(message) {
+	// Return if quiet mode
+	if(options.quiet) {
+		return;
+	}
+	console.log(message);
+}
+
+/**
+ * Opens a file and writes the given message
+ * @param {String} file The full path file name to write a message
+ * @param {String} message The message to be written 
+ * @method write
+ */
+function write(file, message) {
+	var fd = fs.openSync(file, 'w');
+	fs.writeSync(fd, message);
 }
 
 /**
@@ -101,8 +120,20 @@ function write(message) {
  * @method exec
  */
 function exec(args) {
-	var usage = '\n' +
-				'USAGE: fail http://www.xyz.com',
+	var usage = [
+            "\nUsage: fail [options]* [urls]*",
+            " ",
+            "Options:",
+            "  --help | -h                      Displays this information.",
+            "  --format=<format> | -f <format>  Indicate which format [junit-xml | xml | text] to use for output",
+            "  --outputdir=<dir> | -o <dir>     Outputs the spof results to this directory.",
+            "  --print | -p                     Outputs the results in console, instead of saving to a file.",
+            "  --quiet | -q                     Keeps the console clear from logging.",
+            " ",
+            "Example:",
+            "  fail -f junit-xml -o /tests www.ebay.com www.amazon.com",
+            " "
+        ].join("\n"),
 		formatter = spof.getFormatter(options.format || 'junit-xml'),
 		length = args.length,
 		counter = 0,
@@ -115,8 +146,9 @@ function exec(args) {
 		 */
 		flush = function(results) {
 			var buffer = [],
+				file = (options.outputdir? options.outputdir : '.') + '/' + formatter.id + '.' + formatter.extension, 
 				output; 
-			console.log('spof: Flushing the results ...\n');
+			log('spof: Flushing the results');
 			// Buffer the formatter start
 			output = formatter.startFormat();
 			output && buffer.push(output);
@@ -129,8 +161,14 @@ function exec(args) {
 			output && buffer.push(output);
 			
 			// Flush the buffer
-			write(buffer.join('\n'));
-			console.log('\n\nspof: SPOF check DONE!\n');
+			if(options.print) {
+				log('\nspof: Output\n');
+				console.log(buffer.join('\n'));
+			} else {
+				write(file, buffer.join('\n'));
+				log('\nspof: Results available at ' + file);
+			}
+			log('\nspof: SPOF check DONE!\n');
 		};
 	
 	if(!length || options.help) {
@@ -146,7 +184,7 @@ function exec(args) {
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http:\/\//.test(url) ? url: 'http://' + url;	
-		console.log('spof: Analyzing ' + url + ' ...');
+		log('spof: Analyzing ' + url);
 		request(url, function(error, response, body) {
 			if(!error && response.statusCode == 200) {				
 					// Create the DOM window from the page 
@@ -157,7 +195,7 @@ function exec(args) {
 					cssFnStack = getCssFnStack(getCssUrls($dom));
 				
 				// Retrieve the CSS results in parallel and join them
-				console.log('spof: Processing external CSS resources for ' + url + ' ...');
+				log('spof: Processing external CSS resources for ' + url);
 				async.parallel(cssFnStack, function(err, results) {
 					var result = spof.analyze($dom, results.join()),
 						formattedResults = formatter.formatResults(result, url);
@@ -175,7 +213,7 @@ function exec(args) {
 			} else {
 				// Decrement the length
 				length--;
-				console.log('spof: ERROR Unable to load '+ url + ' ...');
+				log('spof: ERROR Unable to load '+ url);
 			}
 		});
 	});
