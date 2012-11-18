@@ -183,7 +183,7 @@ function exec(args) {
 		
 	args.forEach(function(url){
 		// Check if http is present, else append it
-		url = /^http:\/\//.test(url) ? url: 'http://' + url;	
+		url = /^http[s]?:\/\//.test(url) ? url: 'http://' + url;	
 		log('spof: Analyzing ' + url);
 		request(url, function(error, response, body) {
 			if(!error && response.statusCode == 200) {				
