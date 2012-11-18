@@ -125,7 +125,7 @@ function exec(args) {
             " ",
             "Options:",
             "  --help | -h                      Displays this information.",
-            "  --format=<format> | -f <format>  Indicate which format [junit-xml | xml | text] to use for output",
+            "  --format=<format> | -f <format>  Indicate which format [junit-xml | spof-xml | text] to use for output",
             "  --outputdir=<dir> | -o <dir>     Outputs the spof results to this directory.",
             "  --print | -p                     Outputs the results in console, instead of saving to a file.",
             "  --quiet | -q                     Keeps the console clear from logging.",
