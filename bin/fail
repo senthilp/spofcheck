@@ -81,7 +81,7 @@ function getAbsoluteUrl(url, mainUrl) {
 			index = path.lastIndexOf('/');
 			path = index < 1? '/': path.substr(0, index + 1); // path should always end with slash /
 			// If there is a folder traverse (..) in given url, then traverse upto the depth
-			while(depth--) {
+			while(depth-- && path.length > 1) {
 				path = path.replace(/[^\/]*\/$/, '');
 			}			
 		}		
