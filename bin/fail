@@ -45,19 +45,67 @@ var options = {
 options = nopt(options, shortHand);
 
 /**
+ * Convert a given relative URL to absolute URL
+ * @param {String} url The url to be converted to absolute. 
+ * @param {String} mainUrl The main URL of the page.
+ * @return {String} The fully qualified absolute URL. 
+ * @method getAbsoluteUrl
+ */
+function getAbsoluteUrl(url, mainUrl) {
+	// If url or mainUrl not present return the given url
+	if(!url || !mainUrl) {
+		return url;
+	}
+	// If url begins with http(s) then it is already an absolute URL, so return given url
+	if(/^http[s]?:\/\//i.test(url)) {
+		return url;
+	}
+	// If url begins with // it is shortcut to use main page protocol
+	// Change given URL with mainPage url protocol and return
+	if(/^\/\//.test(url)) {
+		return /^http[s]?:/i.exec(mainUrl) + url;		
+	}
+	var protocol = /^http[s]?/i.exec(mainUrl),
+		domain = /^http[s]?:\/\/([^\/]*)[\/]?/i.exec(mainUrl)[1],
+		path = '',
+		depth = url.match(/\.\./g)? url.match(/\.\./g).length: 0,
+		index;
+	// If url needs depth i.e. has folder traverse (..), then strip the folder information
+	url = url.replace(/\.\.\//g, '');
+	
+	// If given url starts with / then ignore path
+	if(!/^\//.test(url)) {
+		path = mainUrl.replace(protocol + '://' + domain, '');
+		// if path is present then remove the resource from the path
+		if(path.length) {
+			index = path.lastIndexOf('/');
+			path = index < 1? '/': path.substr(0, index + 1); // path should always end with slash /
+			// If there is a folder traverse (..) in given url, then traverse upto the depth
+			while(depth--) {
+				path = path.replace(/[^\/]*\/$/, '');
+			}			
+		}		
+	} 
+	
+	return protocol + '://' + domain + path + url;
+}
+
+/**
  * Retrieve the list of external CSS URLs in the page 
  * @param {Object} $dom The DOM handler (jQuery) for the page.
  * @return {Array} An array of URLs. 
+ * @param {String} mainUrl The main URL of the page.
+ * @return {Array} The CSS urls in the page
  * @method getCssUrls
  */
-function getCssUrls($dom) {
+function getCssUrls($dom, mainUrl) {
 	// Retrieving the link elements, using both type and rel attributes 
 	var urls = [].concat($dom('link[type="text/css"]').get())
 				 .concat($dom('link[rel="stylesheet"]').get());
 	
 	// Retrieving the actual urls
 	urls = urls.map(function(url){
-		return url.href;
+		return getAbsoluteUrl(url.href, mainUrl);
 	})
 	
 	// removing duplicates and returning
@@ -192,7 +240,7 @@ function exec(args) {
 					// Get the jQuery DOM interface
 					$dom = $.create(win),
 					// Create the CSS function stack for the async parallelization
-					cssFnStack = getCssFnStack(getCssUrls($dom));
+					cssFnStack = getCssFnStack(getCssUrls($dom, url));
 				
 				// Retrieve the CSS results in parallel and join them
 				log('spof: Processing external CSS resources for ' + url);
