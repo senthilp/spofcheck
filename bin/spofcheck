@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
-* fail
+* spofcheck
 * 
 * CLI for frontend spof detection
 *
@@ -169,7 +169,7 @@ function write(file, message) {
  */
 function exec(args) {
 	var usage = [
-            "\nUsage: fail [options]* [urls]*",
+            "\nUSAGE: spofcheck [options]* [urls]*",
             " ",
             "Options:",
             "  --help | -h                      Displays this information.",
@@ -179,7 +179,7 @@ function exec(args) {
             "  --quiet | -q                     Keeps the console clear from logging.",
             " ",
             "Example:",
-            "  fail -f junit-xml -o /tests www.ebay.com www.amazon.com",
+            "  spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com",
             " "
         ].join("\n"),
 		formatter = spof.getFormatter(options.format || 'junit-xml'),

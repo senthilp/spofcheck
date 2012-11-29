@@ -30,7 +30,10 @@
 		"jsdom": "*",
 		"jquery": "1.7.2"
    	},
+   	"devDependencies": {
+   		"rimraf": "2.0.2"
+   	},
    	"bin":{
-    	"fail":"./bin/fail"
+    	"spofcheck":"./bin/spofcheck"
    	}
 }
