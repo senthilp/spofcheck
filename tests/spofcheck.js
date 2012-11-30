@@ -10,6 +10,6 @@ exec('node bin/spofcheck', function(error, stdout, stderr) {
 	}
 	assert(typeof stdout == 'string', 'Should output help text, when called with no options');
 	assert(/USAGE/.test(stdout), 'Outputs USAGE text');
-	assert(/Example/.test(stdout), 'Outputs an example on how to use spofcheck');
+	assert(/Examle/.test(stdout), 'Outputs an example on how to use spofcheck');
 });
 
