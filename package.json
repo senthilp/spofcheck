@@ -35,5 +35,8 @@
    	},
    	"bin":{
     	"spofcheck":"./bin/spofcheck"
+   	},
+   	"scripts": {
+   		"test": "node tests/spofcheck.js"
    	}
 }
