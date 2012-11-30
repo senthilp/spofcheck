@@ -1,14 +1,15 @@
 {
-	"name":"spof-check",
+	"name":"spofcheck",
    	"description":"A CLI tool for detecting frontend SPOF",
    	"version":"1.0.0",
    	"keywords":[
       	"SPOF",
       	"Frontend SPOF",
-   	  	"SPOF Check"
+   	  	"SPOF Check",
+   	  	"spofcheck"
    	],
    	"main":"./lib/spof.js",
-   	"homepage":"https://github.com/senthilp/spof-check/blob/master/README.md",
+   	"homepage":"https://github.com/senthilp/spofcheck/blob/master/README.md",
    	"contributors":[
    		"Senthil Padmanabhan",
    		"Venkat Sundramurthy"
@@ -20,7 +21,7 @@
    	"licenses":[
     	{
     		"type":"MIT",
-         	"url":"https://github.com/senthilp/spof-check/blob/master/LICENSE"
+         	"url":"https://github.com/senthilp/spofcheck/blob/master/LICENSE"
       	}
    	],
    	"dependencies":{
