@@ -36,7 +36,7 @@ exec('node bin/spofcheck -p -q http://www.cnn.com',
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
 				'Should print results in junit-xml format for ' + message);
 		assert(/ERROR: Possible SPOF attack due to 3rd party script/.test(stdout), 
-				'Should print warning message for ' + message);
+				'Should print error message for ' + message);
 	}
 );
 
@@ -61,7 +61,7 @@ exec('node bin/spofcheck -p -q -f text http://www.cnn.com',
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
 				'Should print results in junit-xml format for ' + message);
 		assert(/ERROR: Possible SPOF attack due to 3rd party script/.test(stdout), 
-				'Should print warning message for ' + message);
+				'Should print error message for ' + message);
 	}
 );
 
@@ -86,7 +86,7 @@ exec('node bin/spofcheck -p -q -f spof-xml http://www.cnn.com',
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
 				'Should print results in junit-xml format for ' + message);
 		assert(/ERROR: Possible SPOF attack due to 3rd party script/.test(stdout), 
-				'Should print warning message for ' + message);
+				'Should print error message for ' + message);
 	}
 );
 
