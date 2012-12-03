@@ -26,6 +26,7 @@
    	],
    	"dependencies":{
 		"nopt": "2.0.0",
+		"request": "2.12.0",		
 		"async": "0.1.22",
 		"jsdom": "0.2.19",
 		"jquery": "1.7.2",
