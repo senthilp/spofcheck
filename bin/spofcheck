@@ -195,8 +195,14 @@ function exec(args) {
 		 */
 		flush = function(results) {
 			var buffer = [],
-				file = (options.outputdir? options.outputdir : '.') + '/' + formatter.id + '.' + formatter.extension, 
+				file = (options.outputdir || '.') + '/' + formatter.id + '.' + formatter.extension, 
 				output; 
+						
+			if(options.outputdir){			
+				// Create output directory
+				mkdirp.sync(options.outputdir); 	
+			}
+			
 			log('spof: Flushing the results');
 			// Buffer the formatter start
 			output = formatter.startFormat();
@@ -229,12 +235,7 @@ function exec(args) {
 		console.log('spof:  Unknown format \'' + options.format + '\'. Cannot proceed');
 		process.exit(0);		
 	}
-	
-	// Create output directory if option provided
-	if(options.outputdir){
-		mkdirp(options.outputdir);	
-	}
-	
+		
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http[s]?:\/\//.test(url) ? url: 'http://' + url;	
