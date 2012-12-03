@@ -15,6 +15,7 @@ var spof = require('../lib/spof.js').spof,
 	request = require('request'),
 	async = require('async'),
 	jsdom = require('jsdom').jsdom,
+	mkdirp = require('mkdirp'),
 	$ = require('jquery');
 
 // Setting jsdom global config
@@ -228,7 +229,12 @@ function exec(args) {
 		console.log('spof:  Unknown format \'' + options.format + '\'. Cannot proceed');
 		process.exit(0);		
 	}
-		
+	
+	// Create output directory if option provided
+	if(options.outputdir){
+		mkdirp(options.outputdir);	
+	}
+	
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http[s]?:\/\//.test(url) ? url: 'http://' + url;	

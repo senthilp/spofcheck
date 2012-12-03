@@ -1,7 +1,7 @@
 {
 	"name":"spofcheck",
    	"description":"A CLI tool for detecting frontend SPOF",
-   	"version":"1.0.0",
+   	"version":"0.0.1",
    	"keywords":[
       	"SPOF",
       	"Frontend SPOF",
@@ -25,11 +25,11 @@
       	}
    	],
    	"dependencies":{
-		"nopt": "*",
-		"request": "*",
-		"async": "*",
-		"jsdom": "*",
-		"jquery": "1.7.2"
+		"nopt": "2.0.0",
+		"async": "0.1.22",
+		"jsdom": "0.2.19",
+		"jquery": "1.7.2",
+		"mkdirp": "0.3.4"
    	},
    	"devDependencies": {
    		"rimraf": "2.0.2"

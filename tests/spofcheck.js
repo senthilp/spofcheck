@@ -389,3 +389,27 @@ exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/sl
 				'Should print warning message for ' + message);
 	}
 );
+
+/**
+ * Save to Disk, verifying --outputdir option
+ * Rule: Load 3rd Party JS Asynchronously
+ * Formatter: junit-xml
+ * URL: http://techcrunch.com/
+ */
+exec('node bin/spofcheck -o dist/spof -q http://techcrunch.com/', 
+	{
+		"timeout": 5000
+	},
+	function(error, stdout, stderr) {
+		if(error) {
+			throw error;
+		}
+		var rule = 'Load 3rd Party JS Asynchronously',
+			formatter = 'junit-xml',
+			url = 'http://techcrunch.com/',
+			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
+		assert(fs.existsSync('dist/spof'), 'dist/spof directory should be created for ' + message);
+		assert(fs.existsSync('dist/spof/junit-xml.xml'), 'dist/spof/junit-xml.xml should be file created for ' + message);
+		rimraf.sync('dist');
+	}
+);
