@@ -16,6 +16,81 @@ exec('node bin/spofcheck', function(error, stdout, stderr) {
 });
 
 /**
+ * Rule: Load 3rd Party JS Asynchronously
+ * Formatter: junit-xml
+ * URL: http://techcrunch.com/
+ */
+exec('node bin/spofcheck -p -q http://techcrunch.com/', 
+	{
+		"timeout": 5000
+	},
+	function(error, stdout, stderr) {
+		if(error) {
+			throw error;
+		}
+		var rule = 'Load 3rd Party JS Asynchronously',
+			formatter = 'junit-xml',
+			url = 'http://techcrunch.com/',
+			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
+		assert(stdout !== '', 'Should print results for ' + message);
+		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
+				'Should print results in junit-xml format for ' + message);
+		assert(/ERROR: Possible SPOF attack due to 3rd party script/.test(stdout), 
+				'Should print warning message for ' + message);
+	}
+);
+
+/**
+ * Rule: Load 3rd Party JS Asynchronously
+ * Formatter: text
+ * URL: http://techcrunch.com/
+ */
+exec('node bin/spofcheck -p -q -f text http://techcrunch.com/', 
+	{
+		"timeout": 5000
+	},
+	function(error, stdout, stderr) {
+		if(error) {
+			throw error;
+		}
+		var rule = 'Load 3rd Party JS Asynchronously',
+			formatter = 'text',
+			url = 'http://techcrunch.com/',
+			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
+		assert(stdout !== '', 'Should print results for ' + message);
+		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
+				'Should print results in junit-xml format for ' + message);
+		assert(/ERROR: Possible SPOF attack due to 3rd party script/.test(stdout), 
+				'Should print warning message for ' + message);
+	}
+);
+
+/**
+ * Rule: Load 3rd Party JS Asynchronously
+ * Formatter: spof-xml
+ * URL: http://techcrunch.com/
+ */
+exec('node bin/spofcheck -p -q -f spof-xml http://techcrunch.com/', 
+	{
+		"timeout": 5000
+	},
+	function(error, stdout, stderr) {
+		if(error) {
+			throw error;
+		}
+		var rule = 'Load 3rd Party JS Asynchronously',
+			formatter = 'spof-xml',
+			url = 'http://techcrunch.com/',
+			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
+		assert(stdout !== '', 'Should print results for ' + message);
+		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
+				'Should print results in junit-xml format for ' + message);
+		assert(/ERROR: Possible SPOF attack due to 3rd party script/.test(stdout), 
+				'Should print warning message for ' + message);
+	}
+);
+
+/**
  * Rule: Load Application JS Non-blocking
  * Formatter: junit-xml
  * URL: http://stevesouders.com/tests/spof/slow-script.php
