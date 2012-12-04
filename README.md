@@ -1,4 +1,9 @@
-##SPOFCheck [![Build Status](https://secure.travis-ci.org/senthilp/spofcheck.png?branch=master)](https://travis-ci.org/senthilp/spofcheck)
-spofcheck is a [CLI](http://en.wikipedia.org/wiki/Command-line_interface) tool to detect possible frontend 
-[SPOF](http://www.stevesouders.com/blog/2010/06/01/frontend-spof/) for web pages. The output is generated in an XML format
+ [![Build Status](https://secure.travis-ci.org/senthilp/spofcheck.png?branch=master)](https://travis-ci.org/senthilp/spofcheck)
+##SPOFCheck - FIghting Frontend [SPOF](http://en.wikipedia.org/wiki/Single_point_of_failure) at its origin
+
+Frontend Single Point Of Failure (SPOF) has become a critical with the increase Thanks to Steve Souders for his initial 
+research on this topic we now have a list which causes this problem
+
+spofcheck is a [Command Line Interface](http://en.wikipedia.org/wiki/Command-line_interface) built in Node.js to detect 
+possible Frontend SPOF for web pages. The output is generated in an XML format
 that can be consumed by [CI](http://en.wikipedia.org/wiki/Continuous_integration) jobs. 
