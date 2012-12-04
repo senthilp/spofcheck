@@ -18,9 +18,9 @@ exec('node bin/spofcheck', function(error, stdout, stderr) {
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: junit-xml
- * URL: http://www.cnn.com
+ * URL: http://techcrunch.com
  */
-exec('node bin/spofcheck -p -q http://www.cnn.com', 
+exec('node bin/spofcheck -p -q http://techcrunch.com', 
 	{
 		"timeout": 5000
 	},
@@ -30,7 +30,7 @@ exec('node bin/spofcheck -p -q http://www.cnn.com',
 		}
 		var rule = 'Load 3rd Party JS Asynchronously',
 			formatter = 'junit-xml',
-			url = 'http://www.cnn.com',
+			url = 'http://techcrunch.com',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
@@ -43,9 +43,9 @@ exec('node bin/spofcheck -p -q http://www.cnn.com',
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: text
- * URL: http://www.cnn.com
+ * URL: http://techcrunch.com
  */
-exec('node bin/spofcheck -p -q -f text http://www.cnn.com', 
+exec('node bin/spofcheck -p -q -f text http://techcrunch.com', 
 	{
 		"timeout": 5000
 	},
@@ -55,7 +55,7 @@ exec('node bin/spofcheck -p -q -f text http://www.cnn.com',
 		}
 		var rule = 'Load 3rd Party JS Asynchronously',
 			formatter = 'text',
-			url = 'http://www.cnn.com',
+			url = 'http://techcrunch.com',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
@@ -68,9 +68,9 @@ exec('node bin/spofcheck -p -q -f text http://www.cnn.com',
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: spof-xml
- * URL: http://www.cnn.com
+ * URL: http://techcrunch.com
  */
-exec('node bin/spofcheck -p -q -f spof-xml http://www.cnn.com', 
+exec('node bin/spofcheck -p -q -f spof-xml http://techcrunch.com', 
 	{
 		"timeout": 5000
 	},
@@ -80,7 +80,7 @@ exec('node bin/spofcheck -p -q -f spof-xml http://www.cnn.com',
 		}
 		var rule = 'Load 3rd Party JS Asynchronously',
 			formatter = 'spof-xml',
-			url = 'http://www.cnn.com',
+			url = 'http://techcrunch.com',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
@@ -392,11 +392,11 @@ exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/sl
 
 /**
  * Save to Disk, verifying --outputdir option
- * Rule: Load 3rd Party JS Asynchronously
+ * Rule: Load Application JS Non-blocking
  * Formatter: junit-xml
- * URL: http://www.cnn.com
+ * URL: http://stevesouders.com/tests/spof/slow-script.php
  */
-exec('node bin/spofcheck -o dist/spof -q http://www.cnn.com', 
+exec('node bin/spofcheck -o dist/spof -q http://stevesouders.com/tests/spof/slow-script.php', 
 	{
 		"timeout": 5000
 	},
@@ -404,9 +404,9 @@ exec('node bin/spofcheck -o dist/spof -q http://www.cnn.com',
 		if(error) {
 			throw error;
 		}
-		var rule = 'Load 3rd Party JS Asynchronously',
+		var rule = 'Load Application JS Non-blocking',
 			formatter = 'junit-xml',
-			url = 'http://www.cnn.com',
+			url = 'http://stevesouders.com/tests/spof/slow-script.php',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(fs.existsSync('dist/spof'), 'dist/spof directory should be created for ' + message);
 		assert(fs.existsSync('dist/spof/junit-xml.xml'), 'dist/spof/junit-xml.xml should be file created for ' + message);
