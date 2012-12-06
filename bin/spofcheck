@@ -31,6 +31,7 @@ var options = {
 		"outputdir": path,
 		"format": String,
 		"help": Boolean,
+		"rules": String,
 		"print": Boolean,
 		"quiet": Boolean
 	},
@@ -38,6 +39,7 @@ var options = {
 		"o": ['--outputdir'],
 		"f": ['--format'],
 		"h": ['--help'],
+		"r": ['--rules'],
 		"p": ['--print'],
 		"q": ['--quiet']
 	};
@@ -163,6 +165,26 @@ function write(file, message) {
 }
 
 /**
+ * Normalizes the rules based on the ruleIds provided in option (-r) 
+ * and previously registered with spof engine
+ * @param {Array} ruleIds The rule IDs to be included in the analysis
+ * @param {Array} rules The rules registered with the spof engine
+ * @return {Array} Normalized set of rules 
+ * @method gatherRules
+ */
+function gatherRules(ruleIds, rules) {
+	var idHash = {};
+	ruleIds.split(',').forEach(function(id){
+		idHash[id] = 1;
+	});
+	
+	return rules.filter(function(rule){
+		return idHash[rule.id];		
+	});
+	
+}
+
+/**
  * Creates a CSS callback function stack to be executed after each external
  * CSS is loaded 
  * @param {Array} args The arguments provided in command line 
@@ -173,11 +195,12 @@ function exec(args) {
             "\nUSAGE: spofcheck [options]* [urls]*",
             " ",
             "Options:",
-            "  --help | -h                      Displays this information.",
-            "  --format=<format> | -f <format>  Indicate which format [junit-xml | spof-xml | text] to use for output",
-            "  --outputdir=<dir> | -o <dir>     Outputs the spof results to this directory.",
-            "  --print | -p                     Outputs the results in console, instead of saving to a file.",
-            "  --quiet | -q                     Keeps the console clear from logging.",
+            "  --help | -h                      			Displays this information.",
+            "  --format=<format> | -f <format>  			Indicate which format [junit-xml | spof-xml | text] to use for output",
+            "  --outputdir=<dir> | -o <dir>     			Outputs the spof results to this directory.",
+            "  --rules=<rule[,rule]+> | -r <rule[,rule]+>   Indicate which rules to include.",
+            "  --print | -p                     			Outputs the results in console, instead of saving to a file.",
+            "  --quiet | -q                     			Keeps the console clear from logging.",
             " ",
             "Example:",
             "  spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com",
@@ -235,7 +258,17 @@ function exec(args) {
 		console.log('spof:  Unknown format \'' + options.format + '\'. Cannot proceed');
 		process.exit(0);		
 	}
-		
+	
+	// Normalize the rules
+	if(options.rules) {
+		// First get the existing rules
+		var rules = spof.getRules();
+		// Reset the rules
+		spof.resetRules();
+		// Register the new set of rules
+		spof.registerRules(gatherRules(options.rules, rules));
+	}
+	
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http[s]?:\/\//.test(url) ? url: 'http://' + url;	

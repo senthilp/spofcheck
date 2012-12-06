@@ -20,7 +20,7 @@ exec('node bin/spofcheck', function(error, stdout, stderr) {
  * Formatter: junit-xml
  * URL: http://techcrunch.com
  */
-exec('node bin/spofcheck -p -q http://techcrunch.com', 
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://techcrunch.com', 
 	{
 		"timeout": 5000
 	},
@@ -46,7 +46,7 @@ exec('node bin/spofcheck -p -q http://techcrunch.com',
  * Formatter: text
  * URL: http://techcrunch.com
  */
-exec('node bin/spofcheck -p -q -f text http://techcrunch.com', 
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://techcrunch.com', 
 	{
 		"timeout": 5000
 	},
@@ -72,7 +72,7 @@ exec('node bin/spofcheck -p -q -f text http://techcrunch.com',
  * Formatter: spof-xml
  * URL: http://techcrunch.com
  */
-exec('node bin/spofcheck -p -q -f spof-xml http://techcrunch.com', 
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://techcrunch.com', 
 	{
 		"timeout": 5000
 	},
@@ -98,7 +98,7 @@ exec('node bin/spofcheck -p -q -f spof-xml http://techcrunch.com',
  * Formatter: junit-xml
  * URL: http://stevesouders.com/tests/spof/slow-script.php
  */
-exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -p -q -r application-js http://stevesouders.com/tests/spof/slow-script.php', 
 	{
 		"timeout": 5000
 	},
@@ -123,7 +123,7 @@ exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-script.ph
  * Formatter: text
  * URL: http://stevesouders.com/tests/spof/slow-script.php
  */
-exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -p -q -r application-js -f text http://stevesouders.com/tests/spof/slow-script.php', 
 	{
 		"timeout": 5000
 	},
@@ -148,7 +148,7 @@ exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-s
  * Formatter: spof-xml
  * URL: http://stevesouders.com/tests/spof/slow-script.php
  */
-exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://stevesouders.com/tests/spof/slow-script.php', 
 	{
 		"timeout": 5000
 	},
@@ -173,7 +173,7 @@ exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/sl
  * Formatter: junit-xml
  * URL: http://stevesouders.com/tests/spof/slow-font-stylesheet.php
  */
-exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
+exec('node bin/spofcheck -p -q -r fontface-stylesheet http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
 	{
 		"timeout": 5000
 	},
@@ -198,7 +198,7 @@ exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-font-styl
  * Formatter: text
  * URL: http://stevesouders.com/tests/spof/slow-font-stylesheet.php
  */
-exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
+exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
 	{
 		"timeout": 5000
 	},
@@ -223,7 +223,7 @@ exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-f
  * Formatter: spof-xml
  * URL: http://stevesouders.com/tests/spof/slow-font-stylesheet.php
  */
-exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
+exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
 	{
 		"timeout": 5000
 	},
@@ -248,7 +248,7 @@ exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/sl
  * Formatter: junit-xml
  * URL: http://stevesouders.com/tests/spof/slow-font.php
  */
-exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-font.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline http://stevesouders.com/tests/spof/slow-font.php', 
 	{
 		"timeout": 5000
 	},
@@ -273,7 +273,7 @@ exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-font.php'
  * Formatter: text
  * URL: http://stevesouders.com/tests/spof/slow-font.php
  */
-exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-font.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline -f text http://stevesouders.com/tests/spof/slow-font.php', 
 	{
 		"timeout": 5000
 	},
@@ -298,7 +298,7 @@ exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-f
  * Formatter: spof-xml
  * URL: http://stevesouders.com/tests/spof/slow-font.php
  */
-exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/slow-font.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://stevesouders.com/tests/spof/slow-font.php', 
 	{
 		"timeout": 5000
 	},
@@ -323,7 +323,7 @@ exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/sl
  * Formatter: junit-xml
  * URL: http://stevesouders.com/tests/spof/slow-font-script.php
  */
-exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-font-script.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://stevesouders.com/tests/spof/slow-font-script.php', 
 	{
 		"timeout": 5000
 	},
@@ -348,7 +348,7 @@ exec('node bin/spofcheck -p -q http://stevesouders.com/tests/spof/slow-font-scri
  * Formatter: text
  * URL: http://stevesouders.com/tests/spof/slow-font-script.php
  */
-exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-font-script.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http://stevesouders.com/tests/spof/slow-font-script.php', 
 	{
 		"timeout": 5000
 	},
@@ -373,7 +373,7 @@ exec('node bin/spofcheck -p -q -f text http://stevesouders.com/tests/spof/slow-f
  * Formatter: spof-xml
  * URL: http://stevesouders.com/tests/spof/slow-font-script.php
  */
-exec('node bin/spofcheck -p -q -f spof-xml http://stevesouders.com/tests/spof/slow-font-script.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml http://stevesouders.com/tests/spof/slow-font-script.php', 
 	{
 		"timeout": 5000
 	},
