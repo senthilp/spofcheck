@@ -27,3 +27,23 @@ a lot of the code logic has been re-used here. The design and packaging of the t
 thanks to [Nicholas Zakas](https://twitter.com/slicknet) and [Nicole Sullivan](https://twitter.com/stubbornella).
 
 ##The command line interface
+spofcheck provides a simple command line interface and runs on Node.js 
+
+To install spofcheck run the following
+
+    npm install -g spofcheck
+
+To run spofcheck, use the following format
+    spofcheck [options]* [urls]*
+    
+    Options
+    --help | -h                       		     Displays this information.
+    --format=<format> | -f <format>   		     Indicate which format [junit-xml | spof-xml | text] to use for output.
+    --outputdir=<dir> | -o <dir>      		     Outputs the spof results to this directory.
+    --rules=<rule[,rule]+> | -r <rule[,rule]+>   Indicate which rules to include.
+    --print | -p                      		     Outputs the results in console, instead of saving to a file.
+    --quiet | -q                      		     Keeps the console clear from logging.
+
+Example
+
+    spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com
