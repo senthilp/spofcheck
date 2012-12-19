@@ -47,3 +47,9 @@ To run spofcheck, use the following format
 Example
 
     spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com
+
+##Rules
+spofcheck by default runs with 5 rules. The rules are maintained in the [rules.js](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js) 
+file. New rules can be easily added by pushing entries to the [rules](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js#L6) 
+array or calling the spof api [registerRules](https://github.com/senthilp/spofcheck/blob/master/lib/engine.js#L142).     
+
