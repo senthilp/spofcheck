@@ -52,10 +52,16 @@ Example
 spofcheck by default runs with 5 rules (checks). The rules are maintained in the [rules.js](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js) 
 file. New rules can be easily added by pushing entries to the [rules](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js#L6) 
 array or calling the spof api [registerRules](https://github.com/senthilp/spofcheck/blob/master/lib/engine.js#L142). The 
-default rules are explained below
+default rules comes from Souder's original [list](http://www.stevesouders.com/blog/2010/06/01/frontend-spof/) outlined below
  
-1. **3rdparty-scripts**: Always load 3rd party external scripts asyncronously in a non-blocking pattern 
-1. **application-js**: Load application JS in a non-blocking pattern or towards the end of page
-1. **fontface-stylesheet**: Try to inline @font-face style. Also make the font files compressed and cacheable
-1. **fontface-inline**: Make sure the fonts files are compressed, cached and small in size
-1. **fontface-inline-precede-script-IE**: Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE
+1. `3rdparty-scripts` - Always load 3rd party external scripts asyncronously in a non-blocking pattern 
+1. `application-js` - Load application JS in a non-blocking pattern or towards the end of page
+1. `fontface-stylesheet` - Try to inline @font-face style. Also make the font files compressed and cacheable
+1. `fontface-inline` - Make sure the fonts files are compressed, cached and small in size
+1. `fontface-inline-precede-script-IE` - Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE
+
+##Output
+spofcheck can output results in one of the below formats
+* `text` - the default format
+* `spof-xml` - an XML format that can be consumed by other utilities
+* `junit-xml` - a format most ci servers can parse
