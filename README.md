@@ -61,7 +61,22 @@ default rules comes from Souder's original [list](http://www.stevesouders.com/bl
 1. `fontface-inline-precede-script-IE` - Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE
 
 ##Output
-spofcheck can output results in one of the below formats
-* `text` - the default format
+spofcheck run creates a file and writes results in one of the below formats
+* `junit-xml` - a format most ci servers can parse, the default format
 * `spof-xml` - an XML format that can be consumed by other utilities
-* `junit-xml` - a format most ci servers can parse
+* `text` - a textual representation of the results
+
+The format can be specified using the `--format` or `-f` option. For just printing results i.e. no file creation, use the 
+`--print` or `-p` option
+
+##Testing
+
+##Issues
+Have a bug or a feature request? [Please open a new issue](https://github.com/senthilp/spofcheck/issues)
+
+##Authors
+**Senthil Padmanabhan** - [github](https://github.com/senthilp) | [twitter](https://twitter.com/senthil_hi)
+<br/>
+**Venkat Sundramurthy** - [github](https://github.com/vsundramurthy) | [twitter](https://twitter.com/vsundramurthy)
+
+##License 
