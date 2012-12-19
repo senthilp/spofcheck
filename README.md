@@ -53,7 +53,7 @@ Example
 spofcheck by default runs with 5 rules (checks). The rules are maintained in the [rules.js](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js) 
 file. New rules can be easily added by pushing entries to the [rules](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js#L6) 
 array or calling the spof api [registerRules](https://github.com/senthilp/spofcheck/blob/master/lib/engine.js#L142). The 
-default rules comes from Souder's original [list](http://www.stevesouders.com/blog/2010/06/01/frontend-spof/) outlined below
+default rules come from Souder's original [list](http://www.stevesouders.com/blog/2010/06/01/frontend-spof/) outlined below
  
 1. `3rdparty-scripts` - Always load 3rd party external scripts asyncronously in a non-blocking pattern 
 1. `application-js` - Load application JS in a non-blocking pattern or towards the end of page
