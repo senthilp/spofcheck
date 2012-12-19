@@ -1,5 +1,5 @@
  [![Build Status](https://secure.travis-ci.org/senthilp/spofcheck.png?branch=master)](https://travis-ci.org/senthilp/spofcheck)
-##SPOFCheck - FIghting Frontend [SPOF](http://en.wikipedia.org/wiki/Single_point_of_failure) at its root
+##SPOFCheck - Fighting Frontend [SPOF](http://en.wikipedia.org/wiki/Single_point_of_failure) at its root
 
 With the increase in 3rd party widgets and modernization of web applications, Frontend Single Point Of Failure (SPOF) has 
 become a critical focus point. Thanks to [Steve Souders](https://twitter.com/souders) for his 
@@ -73,7 +73,7 @@ The format can be specified using the `--format` or `-f` option. For just printi
 ##Testing
 Currently tests are written for the Command Line Interface as a whole and not individual modules. The main test file is [spofcheck.js](https://github.com/senthilp/spofcheck/blob/master/tests/spofcheck.js) 
 and uses the default Node.js [assert](https://npmjs.org/package/assert) module. To run the tests - clone the [repo](https://github.com/senthilp/spofcheck), 
-install the package `$ npm install` and execute
+install the package `$ npm install` and run
 
     $ npm test
 
