@@ -15,7 +15,7 @@ plugin and [YSlow 3PO](http://www.phpied.com/3po/) extension. At eBay we wanted 
 the development cycle itself. This means an additional hook in our automated testing pipeline. The solution resulted in 
 creating a simple tool which works on our test URLs and produces SPOF alerts. The tool is **spofcheck**.
 
-spofcheck is a [Command Line Interface](http://en.wikipedia.org/wiki/Command-line_interface) built in Node.js to detect 
+spofcheck is a [Command Line Interface](http://en.wikipedia.org/wiki/Command-line_interface) (CLI) built in Node.js to detect 
 possible Frontend SPOF for web pages. The output is generated in an XML format
 that can be consumed and reported by [CI](http://en.wikipedia.org/wiki/Continuous_integration) jobs. The tool is integrated 
 with our secondary jobs, which run daily automation on a testing server where a development branch is deployed. In case of 
@@ -31,9 +31,10 @@ spofcheck provides a simple command line interface and runs on Node.js
 
 To install spofcheck run the following
 
-    npm install -g spofcheck
+    $ npm install -g spofcheck
 
 To run spofcheck, use the following format
+
     spofcheck [options]* [urls]*
     
     Options
@@ -46,7 +47,7 @@ To run spofcheck, use the following format
 
 Example
 
-    spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com
+    $ spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com
 
 ##Rules
 spofcheck by default runs with 5 rules (checks). The rules are maintained in the [rules.js](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js) 
@@ -70,6 +71,11 @@ The format can be specified using the `--format` or `-f` option. For just printi
 `--print` or `-p` option
 
 ##Testing
+Currently tests are written for the Command Line Interface as a whole and not individual modules. The main test file is [spofcheck.js](https://github.com/senthilp/spofcheck/blob/master/tests/spofcheck.js) 
+and uses the default Node.js [assert](https://npmjs.org/package/assert) module. To run the tests - clone the [repo](https://github.com/senthilp/spofcheck), 
+install the package `$ npm install` and execute
+
+    $ npm test
 
 ##Issues
 Have a bug or a feature request? [Please open a new issue](https://github.com/senthilp/spofcheck/issues)
