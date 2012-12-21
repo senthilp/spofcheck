@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="SPOFCheck : Fighting Frontend SPOF at its root" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>SPOFCheck</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/senthilp/spofcheck">View on GitHub</a>
+
+          <h1 id="project_title">SPOFCheck</h1>
+          <h2 id="project_tagline">Fighting Frontend SPOF at its root</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/senthilp/spofcheck/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/senthilp/spofcheck/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>With the increase in 3rd party widgets and modernization of web applications, Frontend Single Point Of Failure (SPOF) has 
+become a critical focus point. Thanks to <a href="https://twitter.com/souders">Steve Souders</a> for his 
+<a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">initial research</a> 
+on this topic, we now have a list of common patterns which causes SPOF. The awareness of Frontend SPOF has also increased 
+tremendously among engineers, thanks to some of the recent blogs and <a href="http://calendar.perfplanet.com/2012/spof-bug/">articles</a> 
+emphasizing the importance of it.  </p>
+
+<p>There are already a bunch of utilities and plugins out there which can detect possible SPOF vulnerabilities in a web application. 
+The most notable ones being <a href="http://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html">webpagetest.org</a>, 
+<a href="https://chrome.google.com/webstore/detail/spof-o-matic/plikhggfbplemddobondkeogomgoodeg?hl=en-US">SPOF-O-Matic</a> chrome 
+plugin and <a href="http://www.phpied.com/3po/">YSlow 3PO</a> extension. At eBay we wanted to detect SPOF at a very early stage, during
+the development cycle itself. This means an additional hook in our automated testing pipeline. The solution resulted in 
+creating a simple tool which works on our test URLs and produces SPOF alerts. The tool is <strong>spofcheck</strong>.</p>
+
+<p>spofcheck is a <a href="http://en.wikipedia.org/wiki/Command-line_interface">Command Line Interface</a> (CLI) built in Node.js to detect 
+possible Frontend SPOF for web pages. The output is generated in an XML format
+that can be consumed and reported by <a href="http://en.wikipedia.org/wiki/Continuous_integration">CI</a> jobs. The tool is integrated 
+with our secondary jobs, which run daily automation on a testing server where a development branch is deployed. In case of 
+a SPOF alert, engineers are notified and they act on it accordingly. This process ensures that SPOFs are contained within 
+the development cycle and do not sneak into staging or production. </p>
+
+<p>Thanks to github projects <a href="https://github.com/pmeenan/spof-o-matic">spof-o-matic</a> and <a href="https://github.com/stoyan/yslow">3po</a>, 
+a lot of the code logic has been re-used here. The design and packaging of the tool is based on <a href="https://github.com/stubbornella/csslint">csslint</a>, 
+thanks to <a href="https://twitter.com/slicknet">Nicholas Zakas</a> and <a href="https://twitter.com/stubbornella">Nicole Sullivan</a>.</p>
+
+<h2>The command line interface</h2>
+
+<p>spofcheck provides a simple command line interface and runs on Node.js </p>
+
+<p>To install spofcheck run the following</p>
+
+<pre><code>$ npm install -g spofcheck
+</code></pre>
+
+<p>To run spofcheck, use the following format</p>
+
+<pre><code>spofcheck [options]* [urls]*
+
+Options
+--help | -h                                  Displays this information.
+--format=&lt;format&gt; | -f &lt;format&gt;              Indicate which format [junit-xml | spof-xml | text] to use for output.
+--outputdir=&lt;dir&gt; | -o &lt;dir&gt;                 Outputs the spof results to this directory.
+--rules=&lt;rule[,rule]+&gt; | -r &lt;rule[,rule]+&gt;   Indicate which rules to include.
+--print | -p                                 Outputs the results in console, instead of saving to a file.
+--quiet | -q                                 Keeps the console clear from logging.
+</code></pre>
+
+<p>Example</p>
+
+<pre><code>$ spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com
+</code></pre>
+
+<h2>Rules</h2>
+
+<p>spofcheck by default runs with 5 rules (checks). The rules are maintained in the <a href="https://github.com/senthilp/spofcheck/blob/master/lib/rules.js">rules.js</a> 
+file. New rules can be easily added by pushing entries to the <a href="https://github.com/senthilp/spofcheck/blob/master/lib/rules.js#L6">rules</a> 
+array or calling the spof api <a href="https://github.com/senthilp/spofcheck/blob/master/lib/engine.js#L142">registerRules</a>. The 
+default rules come from Souder's original <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">list</a> outlined below</p>
+
+<ol>
+<li>
+<code>3rdparty-scripts</code> - Always load 3rd party external scripts asyncronously in a non-blocking pattern </li>
+<li>
+<code>application-js</code> - Load application JS in a non-blocking pattern or towards the end of page</li>
+<li>
+<code>fontface-stylesheet</code> - Try to inline @font-face style. Also make the font files compressed and cacheable</li>
+<li>
+<code>fontface-inline</code> - Make sure the fonts files are compressed, cached and small in size</li>
+<li>
+<code>fontface-inline-precede-script-IE</code> - Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE</li>
+</ol><h2>Output</h2>
+
+<p>spofcheck run creates a file and writes results in one of the below formats</p>
+
+<ul>
+<li>
+<code>junit-xml</code> - a format most ci servers can parse, the default format</li>
+<li>
+<code>spof-xml</code> - an XML format that can be consumed by other utilities</li>
+<li>
+<code>text</code> - a textual representation of the results</li>
+</ul><p>The format can be specified using the <code>--format</code> or <code>-f</code> option. For just printing results i.e. no file creation, use the 
+<code>--print</code> or <code>-p</code> option</p>
+
+<h2>Testing</h2>
+
+<p>Currently tests are written for the Command Line Interface as a whole and not individual modules. The main test file is <a href="https://github.com/senthilp/spofcheck/blob/master/tests/spofcheck.js">spofcheck.js</a> 
+and uses the default Node.js <a href="https://npmjs.org/package/assert">assert</a> module. To run the tests - clone the <a href="https://github.com/senthilp/spofcheck">repo</a>, 
+install the package <code>$ npm install</code> and run</p>
+
+<pre><code>$ npm test
+</code></pre>
+
+<h2>Issues</h2>
+
+<p>Have a bug or a feature request? <a href="https://github.com/senthilp/spofcheck/issues">Please open a new issue</a></p>
+
+<h2>Authors</h2>
+
+<p><strong>Senthil Padmanabhan</strong> - <a href="https://github.com/senthilp">github</a> | <a href="https://twitter.com/senthil_hi">twitter</a>
+<br><strong>Venkat Sundramurthy</strong> - <a href="https://github.com/vsundramurthy">github</a> | <a href="https://twitter.com/vsundramurthy">twitter</a></p>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2012 eBay Inc.</p>
+
+<p>Released under the MIT License
+<a href="http://www.opensource.org/licenses/MIT">http://www.opensource.org/licenses/MIT</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">SPOFCheck maintained by <a href="https://github.com/senthilp">senthilp</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
