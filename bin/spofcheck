@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 
 /**
-* spofcheck
-* 
-* CLI for frontend spof detection
-*
-**/
+ * Copyright (c) 2012 eBay Inc.
+ * Author: Senthil Padmanabhan
+ *	
+ * Released under the MIT License
+ * http://www.opensource.org/licenses/MIT
+ * 
+ * spofcheck
+ * 
+ * CLI for frontend spof detection
+ *
+ */
 
 // dependencies
 var spof = require('../lib/spof.js').spof,

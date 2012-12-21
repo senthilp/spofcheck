@@ -86,3 +86,8 @@ Have a bug or a feature request? [Please open a new issue](https://github.com/se
 **Venkat Sundramurthy** - [github](https://github.com/vsundramurthy) | [twitter](https://twitter.com/vsundramurthy)
 
 ##License 
+Copyright (c) 2012 eBay Inc.
+Authors: Senthil Padmanabhan and Venkat Sundramurthy
+
+Released under the MIT License
+http://www.opensource.org/licenses/MIT
