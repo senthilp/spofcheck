@@ -1,3 +1,16 @@
+/**
+ * Copyright (c) 2012 eBay Inc.
+ * Author: Senthil Padmanabhan
+ *	
+ * Released under the MIT License
+ * http://www.opensource.org/licenses/MIT
+ * 
+ * spofcheck.js
+ * 
+ * Test suite for the spofcheck CLI
+ *
+ */
+
 var exec   = require('child_process').exec,
 	assert = require('assert'), 
 	fs     = require('fs'),
