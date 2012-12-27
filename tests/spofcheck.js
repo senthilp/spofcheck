@@ -184,9 +184,9 @@ exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.git
 /**
  * Rule: Stylesheet With @font-face
  * Formatter: junit-xml
- * URL: http://stevesouders.com/tests/spof/slow-font-stylesheet.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html
  */
-exec('node bin/spofcheck -p -q -r fontface-stylesheet http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
+exec('node bin/spofcheck -p -q -r fontface-stylesheet http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', 
 	{
 		"timeout": 5000
 	},
@@ -196,7 +196,7 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet http://stevesouders.com/te
 		}
 		var rule = 'Stylesheet With @font-face',
 			formatter = 'junit-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-font-stylesheet.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
@@ -209,9 +209,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet http://stevesouders.com/te
 /**
  * Rule: Stylesheet With @font-face
  * Formatter: text
- * URL: http://stevesouders.com/tests/spof/slow-font-stylesheet.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html
  */
-exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
+exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', 
 	{
 		"timeout": 5000
 	},
@@ -221,7 +221,7 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://stevesouder
 		}
 		var rule = 'Stylesheet With @font-face',
 			formatter = 'text',
-			url = 'http://stevesouders.com/tests/spof/slow-font-stylesheet.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
@@ -234,9 +234,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://stevesouder
 /**
  * Rule: Stylesheet With @font-face
  * Formatter: spof-xml
- * URL: http://stevesouders.com/tests/spof/slow-font-stylesheet.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html
  */
-exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://stevesouders.com/tests/spof/slow-font-stylesheet.php', 
+exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', 
 	{
 		"timeout": 5000
 	},
@@ -246,7 +246,7 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://steveso
 		}
 		var rule = 'Stylesheet With @font-face',
 			formatter = 'spof-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-font-stylesheet.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
@@ -259,9 +259,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://steveso
 /**
  * Rule: Inline @font-face
  * Formatter: junit-xml
- * URL: http://stevesouders.com/tests/spof/slow-font.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline http://stevesouders.com/tests/spof/slow-font.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline http://senthilp.github.com/spofcheck/tests/fontface-inline.html', 
 	{
 		"timeout": 5000
 	},
@@ -271,7 +271,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline http://stevesouders.com/tests/
 		}
 		var rule = 'Inline @font-face',
 			formatter = 'junit-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-font.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
@@ -284,9 +284,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline http://stevesouders.com/tests/
 /**
  * Rule: Inline @font-face
  * Formatter: text
- * URL: http://stevesouders.com/tests/spof/slow-font.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline -f text http://stevesouders.com/tests/spof/slow-font.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline -f text http://senthilp.github.com/spofcheck/tests/fontface-inline.html', 
 	{
 		"timeout": 5000
 	},
@@ -296,7 +296,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f text http://stevesouders.co
 		}
 		var rule = 'Inline @font-face',
 			formatter = 'text',
-			url = 'http://stevesouders.com/tests/spof/slow-font.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
@@ -309,9 +309,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f text http://stevesouders.co
 /**
  * Rule: Inline @font-face
  * Formatter: spof-xml
- * URL: http://stevesouders.com/tests/spof/slow-font.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://stevesouders.com/tests/spof/slow-font.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-inline.html', 
 	{
 		"timeout": 5000
 	},
@@ -321,7 +321,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://stevesouder
 		}
 		var rule = 'Inline @font-face',
 			formatter = 'spof-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-font.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
