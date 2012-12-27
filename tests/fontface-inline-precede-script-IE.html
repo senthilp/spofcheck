@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Inline @font-face precede Script tag IE issue</title>
+</head>
+<body>
+	<script>
+		var test = 7;
+	</script>
+	<style type="text/css">
+		@font-face {
+		    font-family: 'LatoBlack';
+		    src: url('fonts/Lato-Bla-webfont.eot');
+		    src: url('fonts/Lato-Bla-webfont.eot?#iefix') format('embedded-opentype'),
+		         url('fonts/Lato-Bla-webfont.woff') format('woff'),
+		         url('fonts/Lato-Bla-webfont.ttf') format('truetype'),
+		         url('fonts/Lato-Bla-webfont.svg#LatoBlack') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		}		
+		h1, h2 {
+			font-family: 'LatoBlack';
+		}		
+	</style>
+	<h1>Inline @font-face precede Script tag IE issue</h1>
+	<h2>Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE</h2>
+	<br/>
+	<br/>
+	<img src="img/factory.png">
+</body>
+</html>
