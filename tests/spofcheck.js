@@ -109,9 +109,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://techcrunch
 /**
  * Rule: Load Application JS Non-blocking
  * Formatter: junit-xml
- * URL: http://stevesouders.com/tests/spof/slow-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -p -q -r application-js http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -p -q -r application-js http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
 		"timeout": 5000
 	},
@@ -121,7 +121,7 @@ exec('node bin/spofcheck -p -q -r application-js http://stevesouders.com/tests/s
 		}
 		var rule = 'Load Application JS Non-blocking',
 			formatter = 'junit-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
@@ -134,9 +134,9 @@ exec('node bin/spofcheck -p -q -r application-js http://stevesouders.com/tests/s
 /**
  * Rule: Load Application JS Non-blocking
  * Formatter: text
- * URL: http://stevesouders.com/tests/spof/slow-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -p -q -r application-js -f text http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -p -q -r application-js -f text http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
 		"timeout": 5000
 	},
@@ -146,7 +146,7 @@ exec('node bin/spofcheck -p -q -r application-js -f text http://stevesouders.com
 		}
 		var rule = 'Load Application JS Non-blocking',
 			formatter = 'text',
-			url = 'http://stevesouders.com/tests/spof/slow-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
@@ -159,9 +159,9 @@ exec('node bin/spofcheck -p -q -r application-js -f text http://stevesouders.com
 /**
  * Rule: Load Application JS Non-blocking
  * Formatter: spof-xml
- * URL: http://stevesouders.com/tests/spof/slow-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
 		"timeout": 5000
 	},
@@ -171,7 +171,7 @@ exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://stevesouders
 		}
 		var rule = 'Load Application JS Non-blocking',
 			formatter = 'spof-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
@@ -410,9 +410,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml 
  * Save to Disk, verifying --outputdir option
  * Rule: Load Application JS Non-blocking
  * Formatter: junit-xml
- * URL: http://stevesouders.com/tests/spof/slow-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -o dist/spof -q http://stevesouders.com/tests/spof/slow-script.php', 
+exec('node bin/spofcheck -o dist/spof -q http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
 		"timeout": 5000
 	},
@@ -422,7 +422,7 @@ exec('node bin/spofcheck -o dist/spof -q http://stevesouders.com/tests/spof/slow
 		}
 		var rule = 'Load Application JS Non-blocking',
 			formatter = 'junit-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(fs.existsSync('dist/spof'), 'dist/spof directory should be created for ' + message);
 		assert(fs.existsSync('dist/spof/junit-xml.xml'), 'dist/spof/junit-xml.xml should be file created for ' + message);
