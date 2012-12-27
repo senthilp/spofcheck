@@ -334,9 +334,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.gi
 /**
  * Rule: Inline @font-face precede Script tag IE issue
  * Formatter: junit-xml
- * URL: http://stevesouders.com/tests/spof/slow-font-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://stevesouders.com/tests/spof/slow-font-script.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', 
 	{
 		"timeout": 5000
 	},
@@ -346,7 +346,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://steve
 		}
 		var rule = 'Inline @font-face precede Script tag IE issue',
 			formatter = 'junit-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-font-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
@@ -359,9 +359,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://steve
 /**
  * Rule: Inline @font-face precede Script tag IE issue
  * Formatter: text
- * URL: http://stevesouders.com/tests/spof/slow-font-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http://stevesouders.com/tests/spof/slow-font-script.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', 
 	{
 		"timeout": 5000
 	},
@@ -371,7 +371,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http
 		}
 		var rule = 'Inline @font-face precede Script tag IE issue',
 			formatter = 'text',
-			url = 'http://stevesouders.com/tests/spof/slow-font-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
@@ -384,9 +384,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http
 /**
  * Rule: Inline @font-face precede Script tag IE issue
  * Formatter: spof-xml
- * URL: http://stevesouders.com/tests/spof/slow-font-script.php
+ * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml http://stevesouders.com/tests/spof/slow-font-script.php', 
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', 
 	{
 		"timeout": 5000
 	},
@@ -396,7 +396,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml 
 		}
 		var rule = 'Inline @font-face precede Script tag IE issue',
 			formatter = 'spof-xml',
-			url = 'http://stevesouders.com/tests/spof/slow-font-script.php',
+			url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
