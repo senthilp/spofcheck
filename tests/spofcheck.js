@@ -31,20 +31,19 @@ exec('node bin/spofcheck', function(error, stdout, stderr) {
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: junit-xml
- * URL: http://techcrunch.com
+ * URL: http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html
  */
-exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://techcrunch.com', 
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 
 	{
 		"timeout": 5000
 	},
 	function(error, stdout, stderr) {
-		return;
 		if(error) {
 			throw error;
 		}
 		var rule = 'Load 3rd Party JS Asynchronously',
 			formatter = 'junit-xml',
-			url = 'http://techcrunch.com',
+			url = 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout), 
@@ -57,20 +56,19 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://techcrunch.com',
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: text
- * URL: http://techcrunch.com
+ * URL: http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html
  */
-exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://techcrunch.com', 
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 
 	{
 		"timeout": 5000
 	},
 	function(error, stdout, stderr) {
-		return;
 		if(error) {
 			throw error;
 		}
 		var rule = 'Load 3rd Party JS Asynchronously',
 			formatter = 'text',
-			url = 'http://techcrunch.com',
+			url = 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout), 
@@ -83,20 +81,19 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://techcrunch.com
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: spof-xml
- * URL: http://techcrunch.com
+ * URL: http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html
  */
-exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://techcrunch.com', 
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 
 	{
 		"timeout": 5000
 	},
 	function(error, stdout, stderr) {
-		return;
 		if(error) {
 			throw error;
 		}
 		var rule = 'Load 3rd Party JS Asynchronously',
 			formatter = 'spof-xml',
-			url = 'http://techcrunch.com',
+			url = 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html',
 			message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
 		assert(stdout !== '', 'Should print results for ' + message);
 		assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout), 
