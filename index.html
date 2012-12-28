@@ -35,7 +35,7 @@
         (<a href="http://en.wikipedia.org/wiki/Single_point_of_failure">SPOF</a>) has 
 become a critical focus point. Thanks to <a href="https://twitter.com/souders">Steve Souders</a> for his 
 <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">initial research</a> 
-on this topic, we now have a list of common patterns which causes SPOF. The awareness of Frontend SPOF has also increased 
+on this topic, we now have a list of common patterns which cause SPOF. The awareness of Frontend SPOF has also increased 
 tremendously among engineers, thanks to some of the recent blogs and <a href="http://calendar.perfplanet.com/2012/spof-bug/">articles</a> 
 emphasizing the importance of it.  </p>
 
@@ -44,9 +44,9 @@ The most notable ones being <a href="http://blog.patrickmeenan.com/2011/10/testi
 <a href="https://chrome.google.com/webstore/detail/spof-o-matic/plikhggfbplemddobondkeogomgoodeg?hl=en-US">SPOF-O-Matic</a> chrome 
 plugin and <a href="http://www.phpied.com/3po/">YSlow 3PO</a> extension. At eBay we wanted to detect SPOF at a very early stage, during
 the development cycle itself. This means an additional hook in our automated testing pipeline. The solution resulted in 
-creating a simple tool which works on our test URLs and produces SPOF alerts. The tool is <strong>spofcheck</strong>.</p>
+creating a simple tool which works on our test URLs and produces SPOF alerts. The tool is <strong>SPOFCheck</strong>.</p>
 
-<p>spofcheck is a <a href="http://en.wikipedia.org/wiki/Command-line_interface">Command Line Interface</a> (CLI) built in Node.js to detect 
+<p>SPOFCheck is a <a href="http://en.wikipedia.org/wiki/Command-line_interface">Command Line Interface</a> (CLI) built in Node.js to detect 
 possible Frontend SPOF for web pages. The output is generated in an XML format
 that can be consumed and reported by <a href="http://en.wikipedia.org/wiki/Continuous_integration">CI</a> jobs. The tool is integrated 
 with our secondary jobs, which run daily automation on a testing server where a development branch is deployed. In case of 
@@ -59,14 +59,14 @@ thanks to <a href="https://twitter.com/slicknet">Nicholas Zakas</a> and <a href=
 
 <h2>The command line interface</h2>
 
-<p>spofcheck provides a simple command line interface and runs on Node.js </p>
+<p>SPOFCheck provides a simple command line interface and runs on Node.js </p>
 
-<p>To install spofcheck run the following</p>
+<p>To install SPOFCheck run the following</p>
 
 <pre><code>$ npm install -g spofcheck
 </code></pre>
 
-<p>To run spofcheck, use the following format</p>
+<p>To run SPOFCheck, use the following format</p>
 
 <pre><code>spofcheck [options]* [urls]*
 
@@ -86,10 +86,10 @@ Options
 
 <h2>Rules</h2>
 
-<p>spofcheck by default runs with 5 rules (checks). The rules are maintained in the <a href="https://github.com/senthilp/spofcheck/blob/master/lib/rules.js">rules.js</a> 
+<p>SPOFCheck by default runs with 5 rules (checks). The rules are maintained in the <a href="https://github.com/senthilp/spofcheck/blob/master/lib/rules.js">rules.js</a> 
 file. New rules can be easily added by pushing entries to the <a href="https://github.com/senthilp/spofcheck/blob/master/lib/rules.js#L6">rules</a> 
 array or calling the spof api <a href="https://github.com/senthilp/spofcheck/blob/master/lib/engine.js#L142">registerRules</a>. The 
-default rules come from Souder's original <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">list</a> outlined below</p>
+default rules come from Souders's original <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">list</a> outlined below</p>
 
 <ol>
 <li>
@@ -104,11 +104,11 @@ default rules come from Souder's original <a href="http://www.stevesouders.com/b
 <code>fontface-inline-precede-script-IE</code> - Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE</li>
 </ol><h2>Output</h2>
 
-<p>spofcheck run creates a file and writes results in one of the below formats</p>
+<p>SPOFCheck creates a file and writes results in one of the below formats</p>
 
 <ul>
 <li>
-<code>junit-xml</code> - a format most ci servers can parse, the default format</li>
+<code>junit-xml</code> - a format most CI servers can parse, the default format</li>
 <li>
 <code>spof-xml</code> - an XML format that can be consumed by other utilities</li>
 <li>
