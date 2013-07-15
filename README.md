@@ -1,4 +1,6 @@
- [![Build Status](https://secure.travis-ci.org/senthilp/spofcheck.png?branch=master)](https://travis-ci.org/senthilp/spofcheck)
+[![NPM](https://nodei.co/npm/spofcheck.png?downloads=true)](https://nodei.co/npm/spofcheck/)
+
+[![Build Status](https://secure.travis-ci.org/senthilp/spofcheck.png?branch=master)](https://travis-ci.org/senthilp/spofcheck)
 ##SPOFCheck - Fighting Frontend [SPOF](http://en.wikipedia.org/wiki/Single_point_of_failure) at its root
 
 With the increase in 3rd party widgets and modernization of web applications, Frontend Single Point Of Failure (SPOF) has 
