@@ -84,8 +84,6 @@ Have a bug or a feature request? [Please open a new issue](https://github.com/se
 
 ##Authors
 **Senthil Padmanabhan** - [github](https://github.com/senthilp) | [twitter](https://twitter.com/senthil_hi)
-<br/>
-**Venkat Sundramurthy** - [github](https://github.com/vsundramurthy) | [twitter](https://twitter.com/vsundramurthy)
 
 ##License 
 Copyright (c) 2012 eBay Inc.
