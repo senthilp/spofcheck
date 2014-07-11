@@ -115,11 +115,11 @@ function getCssUrls($dom, mainUrl) {
 	// Retrieving the actual urls
 	urls = urls.map(function(url){
 		return getAbsoluteUrl(url.href, mainUrl);
-	})
+	});
 	
 	// removing duplicates and returning
 	return urls.filter(function(url, index) {
-		return this.indexOf(url) == index;
+		return this.indexOf(url) === index;
 	}, urls);
 }
 
@@ -135,12 +135,12 @@ function getCssFnStack(urls) {
 	urls.forEach(function(url) {
 		cssFnStack.push(function(callback) {
 			request(url, function(error, response, body) {
-				if(error || response.statusCode != 200) {
+				if(error || response.statusCode !== 200) {
 					body = '';
 					log('spof: ERROR Unable to load CSS resource '+ url);
 				}
 				callback(null, body);
-			})
+			});
 		});
 	});
 	return cssFnStack;
@@ -235,14 +235,20 @@ function exec(args) {
 			log('spof: Flushing the results');
 			// Buffer the formatter start
 			output = formatter.startFormat();
-			output && buffer.push(output);
+			if(output) {
+				buffer.push(output);	
+			}
 			
 			// Buffer the results
-			results.length && buffer.push(results);
+			if(results.length) {
+				buffer.push(results);	
+			}
 			
 			// Buffer the formatter end
 			output = formatter.endFormat();
-			output && buffer.push(output);
+			if(output) {
+				buffer.push(output);	
+			}
 			
 			// Flush the buffer
 			if(options.print) {
@@ -280,7 +286,7 @@ function exec(args) {
 		url = /^http[s]?:\/\//.test(url) ? url: 'http://' + url;	
 		log('spof: Analyzing ' + url);
 		request(url, function(error, response, body) {
-			if(!error && response.statusCode == 200) {				
+			if(!error && response.statusCode === 200) {
 					// Create the DOM window from the page 
 				var win = jsdom(body, null, null).createWindow(),
 					// Get the jQuery DOM interface
