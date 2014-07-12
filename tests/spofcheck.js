@@ -14,16 +14,17 @@
 var exec   = require('child_process').exec,
 	assert = require('assert'), 
 	fs     = require('fs'),
-	rimraf = require('rimraf');
+	rimraf = require('rimraf'),
+	spofcheck = require('bin/spofcheck'); // SPOFCheck programmable API
 
 /**
  * Basic with no options
  */
-exec('node bin/spofcheck', function(error, stdout, stderr) {
+exec('node bin/spofcheck', function(error, stdout) {
 	if(error) {
 		throw error;
 	}
-	assert(typeof stdout == 'string', 'Should output help text, when called with no options');
+	assert(typeof stdout === 'string', 'Should output help text, when called with no options');
 	assert(/USAGE/.test(stdout), 'Outputs USAGE text');
 	assert(/Example/.test(stdout), 'Outputs an example on how to use spofcheck');
 });
@@ -35,9 +36,9 @@ exec('node bin/spofcheck', function(error, stdout, stderr) {
  */
 exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -60,9 +61,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://senthilp.github.com/sp
  */
 exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -85,9 +86,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://senthilp.githu
  */
 exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -110,9 +111,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://senthilp.g
  */
 exec('node bin/spofcheck -p -q -r application-js http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -135,9 +136,9 @@ exec('node bin/spofcheck -p -q -r application-js http://senthilp.github.com/spof
  */
 exec('node bin/spofcheck -p -q -r application-js -f text http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -160,9 +161,9 @@ exec('node bin/spofcheck -p -q -r application-js -f text http://senthilp.github.
  */
 exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -185,9 +186,9 @@ exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.git
  */
 exec('node bin/spofcheck -p -q -r fontface-stylesheet http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -210,9 +211,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet http://senthilp.github.com
  */
 exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -235,9 +236,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://senthilp.gi
  */
 exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -260,9 +261,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://senthil
  */
 exec('node bin/spofcheck -p -q -r fontface-inline http://senthilp.github.com/spofcheck/tests/fontface-inline.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -285,9 +286,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline http://senthilp.github.com/spo
  */
 exec('node bin/spofcheck -p -q -r fontface-inline -f text http://senthilp.github.com/spofcheck/tests/fontface-inline.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -310,9 +311,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f text http://senthilp.github
  */
 exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-inline.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -335,9 +336,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.gi
  */
 exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -360,9 +361,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://senth
  */
 exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -385,9 +386,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http
  */
 exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error, stdout) {
 		if(error) {
 			throw error;
 		}
@@ -411,9 +412,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml 
  */
 exec('node bin/spofcheck -o dist/spof -q http://senthilp.github.com/spofcheck/tests/application-js.html', 
 	{
-		"timeout": 5000
+		"timeout": 20000
 	},
-	function(error, stdout, stderr) {
+	function(error) {
 		if(error) {
 			throw error;
 		}
@@ -426,3 +427,58 @@ exec('node bin/spofcheck -o dist/spof -q http://senthilp.github.com/spofcheck/te
 		rimraf.sync('dist');
 	}
 );
+
+/** Programmable API test **/
+/**
+ * Empty URL test
+ */
+spofcheck.run('').then(function() {	
+}, function(errorObj) {
+	assert(/USAGE/i.test(errorObj.message), 'Programmable API: Should output usage text when no URLs are provided');	
+}).done();
+
+/**
+ * Invalid URL test
+ */
+spofcheck.run('www.invalidurlneverexists.com').then(function() {	
+}, function(errorObj) {
+	assert(/invalidurlneverexists/.test(errorObj.message), 'Programmable API: ' + errorObj.message);	
+}).done();
+
+/**
+ * Invalid format test
+ */
+spofcheck.run('http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+	"format": "xml"
+}).then(function() {	
+}, function(errorObj) {
+	assert(/format/i.test(errorObj.message), 'Programmable API: Should output an unknown format error message');	
+}).done();
+
+/**
+ * Invalid rule check
+ */
+spofcheck.run('http://senthilp.github.com/spofcheck/tests/application-js.html', {
+	rules: ['invalid-rule']
+}).then(function(){	
+},function(errorObj) {
+	assert(/invalid-rule/.test(errorObj.message), 'Programmable API: ' + errorObj.message);
+}).done();
+
+/**
+ * Valid URL test for 3rdparty-scripts rule
+ */
+spofcheck.run('http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+	rules: ['3rdparty-scripts']
+}).then(function(results) {	
+	results[0].messages.forEach(function(message) {
+		assert(message.rule.id === '3rdparty-scripts', 'Programmable API: The rule ID should be 3rdparty-scripts instead of ' + message.rule.id);
+	});
+}).done();
+
+/**
+ * Multiple URL test for 3rdparty-scripts rule
+ */
+spofcheck.run(['http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html']).then(function(results) {
+	assert(results.length === 2, 'Programmable API: Should have results for 2 URLs');
+}).done();

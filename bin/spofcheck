@@ -14,14 +14,14 @@
  */
 
 // dependencies
-var spof = require('../lib/spof.js').spof,
-	path = require('path'),
+var path = require('path'),
 	fs = require('fs'),
 	nopt = require('nopt'),
 	request = require('request'),
 	async = require('async'),
 	jsdom = require('jsdom').jsdom,
 	mkdirp = require('mkdirp'),
+	Q = require('q'),
 	$ = require('jquery');
 
 // Setting jsdom global config
@@ -160,6 +160,19 @@ function log(message) {
 }
 
 /**
+ * Wrapper for process.exit, checks for command line mode, print the message & exit
+ * @param {String} message The message to be logged 
+ * @method exit
+ */
+ function exit(message) {
+ 	if(require.main === module) {
+ 		console.log(message);
+ 		process.exit(0);
+ 	}
+ }
+
+
+/**
  * Opens a file and writes the given message
  * @param {String} file The full path file name to write a message
  * @param {String} message The message to be written 
@@ -180,7 +193,11 @@ function write(file, message) {
  */
 function gatherRules(ruleIds, rules) {
 	var idHash = {};
-	ruleIds.split(',').forEach(function(id){
+	// Normalize ruleIds
+	if(!Array.isArray(ruleIds)) {
+		ruleIds = ruleIds.split(',');
+	}
+	ruleIds.forEach(function(id){
 		idHash[id] = 1;
 	});
 	
@@ -193,11 +210,13 @@ function gatherRules(ruleIds, rules) {
 /**
  * Creates a CSS callback function stack to be executed after each external
  * CSS is loaded 
- * @param {Array} args The arguments provided in command line 
+ * @param {Array} args The URLS(s) to run spofcheck
+ * @param {Object} deferred (optional) The deferred object to reject/resolve based on the result
  * @method exec
  */
-function exec(args) {
-	var usage = [
+function exec(args, deferred) {
+	var spof = require('../lib/spof.js').spof,
+		usage = [
             "\nUSAGE: spofcheck [options]* [urls]*",
             " ",
             "Options:",
@@ -213,8 +232,11 @@ function exec(args) {
             " "
         ].join("\n"),
 		formatter = spof.getFormatter(options.format || 'junit-xml'),
+		rules = spof.getRules(),
 		length = args.length,
 		counter = 0,
+		msg = '',
+		resultsQ = [], // Queue to hold the analyzed results
 		formattedResultsQ = [], // Queue to hold the formatted results
 		/**
 		 * Flush the spof results to a file 
@@ -261,26 +283,38 @@ function exec(args) {
 			log('\nspof: SPOF check DONE!\n');
 		};
 	
+	// if deferred is null create noops
+	deferred = deferred || {
+		reject: function() {},
+		resolve: function() {}
+	};
+
 	if(!length || options.help) {
-		console.log(usage);
-		process.exit(0);
+		// Reject the promise
+		deferred.reject(new Error(usage));
+		// Exit immediately
+		return exit(usage);
 	}
 	
 	if(!formatter) {
-		console.log('spof:  Unknown format \'' + options.format + '\'. Cannot proceed');
-		process.exit(0);		
+		msg = 'spof:  Unknown format \'' + options.format + '\'. Cannot proceed';		
+		// Reject the promise
+		deferred.reject(new Error(msg));
+		// Exit immediately		
+		return exit(msg);		
 	}
 	
 	// Normalize the rules
 	if(options.rules) {
-		// First get the existing rules
-		var rules = spof.getRules();
-		// Reset the rules
-		spof.resetRules();
-		// Register the new set of rules
-		spof.registerRules(gatherRules(options.rules, rules));
+		// Normalize the rules
+		rules = gatherRules(options.rules, rules);
+		if(!rules.length) {
+			msg = 'spof: Invalid rules - ' + options.rules;
+			deferred.reject(new Error(msg));
+			return exit(msg);
+		}
 	}
-	
+
 	args.forEach(function(url){
 		// Check if http is present, else append it
 		url = /^http[s]?:\/\//.test(url) ? url: 'http://' + url;	
@@ -297,27 +331,61 @@ function exec(args) {
 				// Retrieve the CSS results in parallel and join them
 				log('spof: Processing external CSS resources for ' + url);
 				async.parallel(cssFnStack, function(err, results) {
-					var result = spof.analyze($dom, results.join()),
+					var result = spof.analyze($dom, results.join(), rules),
 						formattedResults = formatter.formatResults(result, url);
 
-					// Write the formatted results
+					// Push the formatted results & the original results to their corresponding Queues
 					if(formattedResults && formattedResults.length) {
 						formattedResultsQ.push(formattedResults);
+						resultsQ.push(result);
 					}
 					
 					// Flush the results if last url
 					if(++counter === length) {
 						flush(formattedResultsQ.join('\n'));
+						// Resolve the promise
+						deferred.resolve(resultsQ);
 					}
 				});				
-			} else {
+			} else {						
 				// Decrement the length
 				length--;
-				log('spof: ERROR Unable to load '+ url);
+				msg = 'spof: ERROR Unable to load '+ url;
+				log(msg);
+				// Reject the promise
+				deferred.reject(new Error(msg));
 			}
 		});
 	});
 }
 
-// Start the execution
-exec(options.argv.remain);
+// Start the execution only if CLI
+if(require.main === module) {
+	exec(options.argv.remain);
+}
+
+/** SPOFCheck programmable API **/
+/**
+ * The programmable API interface for SPOFCheck
+ * @param {Array|String} urls The URL(s) to perform the spof check 
+ * @param {Object} opts The options to run SPOFCheck, same as the command line
+ * @return {Promise} A spof check results promise to be fullfilled by the caller
+ * @method run
+ */
+var run = function(urls, opts) {
+	var deferred = Q.defer();
+	if(!urls) {
+		urls = [];
+	}
+	urls = Array.isArray(urls)? urls: [urls];
+	options = $.extend({}, {
+		quiet: true // for the programmable API make it quiet by default
+	}, opts);
+	// Execute
+	exec(urls, deferred);
+	// Retunr the promise
+	return deferred.promise;
+};
+
+// Expose the API
+module.exports.run = run;
