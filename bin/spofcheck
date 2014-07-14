@@ -216,6 +216,7 @@ function gatherRules(ruleIds, rules) {
  */
 function exec(args, deferred) {
 	var spof = require('../lib/spof.js').spof,
+		rules = spof.getRules(), // Get the default registered ruleset
 		usage = [
             "\nUSAGE: spofcheck [options]* [urls]*",
             " ",
@@ -231,8 +232,7 @@ function exec(args, deferred) {
             "  spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com",
             " "
         ].join("\n"),
-		formatter = spof.getFormatter(options.format || 'junit-xml'),
-		rules = spof.getRules(),
+		formatter = spof.getFormatter(options.format || 'junit-xml'),		
 		length = args.length,
 		counter = 0,
 		msg = '',

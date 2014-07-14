@@ -2,3 +2,4 @@ node_modules
 build
 .project
 .settings
+/junit-xml.xml
