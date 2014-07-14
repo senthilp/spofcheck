@@ -1,14 +1,14 @@
 {
 	"name":"spofcheck",
    	"description":"A CLI tool for detecting frontend SPOF",
-   	"version":"0.1.3",
+   	"version":"0.1.4",
    	"keywords":[
       	"SPOF",
       	"Frontend SPOF",
    	  	"SPOF Check",
    	  	"spofcheck"
    	],
-   	"main":"./bin/spofcheck",
+   	"main":"./bin/spofcheck.js",
    	"homepage":"https://github.com/senthilp/spofcheck/blob/master/README.md",
    	"contributors":[
    		"Senthil Padmanabhan",
@@ -37,7 +37,7 @@
    		"rimraf": "2.0.2"
    	},
    	"bin":{
-    	"spofcheck":"./bin/spofcheck"
+    	"spofcheck":"./bin/spofcheck.js"
    	},
    	"scripts": {
    		"test": "node tests/spofcheck.js"
