@@ -72,9 +72,57 @@ SPOFCheck creates a file and writes results in one of the below formats
 The format can be specified using the `--format` or `-f` option. For just printing results i.e. no file creation, use the 
 `--print` or `-p` option
 
+##Programmable API
+SPOFCheck also provides a programmable API to be used along with build scripts like grunt. The API is called `run` which takes in a lits of URLs along with options (same options mentioned above) and returns a promise. The promise is either fulfilled with the SPOF analysis results or rejected with an error message.
+```js
+spofcheck.run(['www.google.com', 'www.bing.com'], {
+	rules: ['3rdparty-scripts', 'application-js', 'fontface-stylesheet', 'fontface-inline', 'fontface-inline-precede-script-IE']
+}).then(function(results){	
+	console.log(results);
+},function(errorObject) {
+	console.log(errorObject.message);
+});
+```
+The format of the results object is shown below
+```json
+[  
+   {  
+      "messages":[  
+         {  
+            "type":"warning",
+            "message":"WARNING: Possible SPOF attack in IE due to inline @font-face preceded by a SCRIPT tag",
+            "entity":"NA",
+            "score":"NA",
+            "rule":{  
+               "id":"fontface-inline-precede-script-IE",
+               "name":"Inline @font-face precede Script tag IE issue",
+               "desc":"Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE"
+            }
+         }
+      ],
+      "url":"http://www.bing.com"
+   },
+   {  
+      "messages":[  
+         {  
+            "type":"warning",
+            "message":"WARNING: Possible SPOF attack in IE due to inline @font-face preceded by a SCRIPT tag",
+            "entity":"NA",
+            "score":"NA",
+            "rule":{  
+               "id":"fontface-inline-precede-script-IE",
+               "name":"Inline @font-face precede Script tag IE issue",
+               "desc":"Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE"
+            }
+         }
+      ],
+      "url":"http://www.google.com"
+   }
+]
+```
+
 ##Testing
-Currently tests are written for the Command Line Interface as a whole and not individual modules. The main test file is [spofcheck.js](https://github.com/senthilp/spofcheck/blob/master/tests/spofcheck.js) 
-and uses the default Node.js [assert](https://npmjs.org/package/assert) module. To run the tests - clone the [repo](https://github.com/senthilp/spofcheck), 
+The entire test suite for both, the Command Line Interface and programmable API is available in the main test file  [spofcheck.js](https://github.com/senthilp/spofcheck/blob/master/tests/spofcheck.js). For assertion the default Node.js [assert](https://npmjs.org/package/assert) module is used. To run the tests - clone the [repo](https://github.com/senthilp/spofcheck), 
 install the package `$ npm install` and run
 
     $ npm test
