@@ -75,10 +75,8 @@ The format can be specified using the `--format` or `-f` option. For just printi
 ##Programmable API
 SPOFCheck also provides a programmable API to be used along with build scripts like grunt. The API is called `run` which takes in a lits of URLs along with options (same options mentioned above) and returns a promise. The promise is either fulfilled with the SPOF analysis results or rejected with an error message.
 ```js
-spofcheck.run(['www.google.com', 'www.bing.com'], {
-	rules: ['3rdparty-scripts', 'application-js', 'fontface-stylesheet', 'fontface-inline', 'fontface-inline-precede-script-IE']
-}).then(function(results){	
-	console.log(results);
+spofcheck.run(['www.google.com', 'www.bing.com']).then(function(results){	
+	console.log(JSON.stringify(results));
 },function(errorObject) {
 	console.log(errorObject.message);
 });
