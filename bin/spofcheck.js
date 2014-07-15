@@ -337,6 +337,8 @@ function exec(args, deferred) {
 					// Push the formatted results & the original results to their corresponding Queues
 					if(formattedResults && formattedResults.length) {
 						formattedResultsQ.push(formattedResults);
+						// Add the url to the result before pushing
+						result.url = url;
 						resultsQ.push(result);
 					}
 					
