@@ -147,6 +147,16 @@ function getCssFnStack(urls) {
 }
 
 /**
+ * Checks if spofcheck was triggered from command line
+ * Wrapper for console.log, checks for quiet mode first
+ * @return {Boolean} true if triggered from a command line interface 
+ * @method isCLI
+ */
+function isCLI() {
+	return require.main === module;
+}
+
+/**
  * Wrapper for console.log, checks for quiet mode first
  * @param {String} message The message to be logged 
  * @method log
@@ -165,7 +175,7 @@ function log(message) {
  * @method exit
  */
  function exit(message) {
- 	if(require.main === module) {
+ 	if(isCLI()) {
  		console.log(message);
  		process.exit(0);
  	}
@@ -342,11 +352,14 @@ function exec(args, deferred) {
 						resultsQ.push(result);
 					}
 					
-					// Flush the results if last url
+					// Publish the results if last url
 					if(++counter === length) {
-						flush(formattedResultsQ.join('\n'));
-						// Resolve the promise
-						deferred.resolve(resultsQ);
+						// If CLI flush the results, else resolve promise
+						if(isCLI()) {
+							flush(formattedResultsQ.join('\n'));
+						} else {
+							deferred.resolve(resultsQ);
+						}
 					}
 				});				
 			} else {						
@@ -362,7 +375,7 @@ function exec(args, deferred) {
 }
 
 // Start the execution only if CLI
-if(require.main === module) {
+if(isCLI()) {
 	exec(options.argv.remain);
 }
 
