@@ -15,7 +15,7 @@ var exec = require('child_process').exec,
     assert = require('assert'),
     fs = require('fs'),
     rimraf = require('rimraf'),
-    spofcheck = require('bin/spofcheck'); // SPOFCheck programmable API
+    spofcheck = require('../bin/spofcheck'); // SPOFCheck programmable API
 
 /**
  * Basic with no options
