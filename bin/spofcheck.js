@@ -332,7 +332,7 @@ function exec(args, deferred) {
         request(url, function(error, response, body) {
             if (!error && response.statusCode === 200) {
                 // Create the DOM window from the page 
-                var win = jsdom(body, null, null).defaultView,
+                var win = jsdom(body).defaultView,
                     // Get the jQuery DOM interface
                     $dom = require('jquery')(win),
                     // Create the CSS function stack for the async parallelization
