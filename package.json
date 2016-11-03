@@ -1,7 +1,7 @@
 {
-	"name":"spofcheck",
+	  "name":"spofcheck",
    	"description":"A CLI tool for detecting frontend SPOF",
-   	"version":"0.1.5",
+   	"version":"0.1.6",
    	"keywords":[
       	"SPOF",
       	"Frontend SPOF",
@@ -28,8 +28,8 @@
         "nopt": "2.0.0",
         "request": "2.12.0",		
         "async": "0.1.22",
-        "jsdom": "0.2.19",
-        "jquery": "1.7.2",
+        "jsdom": "1.5.0",
+        "jquery": "1.12.4",
         "mkdirp": "0.3.4",
         "q": "~1.0.1"
    	},
@@ -41,5 +41,8 @@
    	},
    	"scripts": {
    		"test": "node tests/spofcheck.js"
-   	}
+   	},
+    "publishConfig": {
+      "registry": "https://registry.npmjs.org/"
+    }    
 }

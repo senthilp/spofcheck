@@ -3,3 +3,5 @@ build
 .project
 .settings
 /junit-xml.xml
+.DS_Store
+/dist

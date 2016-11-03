@@ -22,7 +22,7 @@ var path = require('path'),
     jsdom = require('jsdom').jsdom,
     mkdirp = require('mkdirp'),
     Q = require('q'),
-    $ = require('jquery');
+    $ = require('jquery')(jsdom().defaultView);
 
 // Setting jsdom global config
 require("jsdom").defaultDocumentFeatures = {
@@ -332,9 +332,9 @@ function exec(args, deferred) {
         request(url, function(error, response, body) {
             if (!error && response.statusCode === 200) {
                 // Create the DOM window from the page 
-                var win = jsdom(body, null, null).createWindow(),
+                var win = jsdom(body, null, null).defaultView,
                     // Get the jQuery DOM interface
-                    $dom = $.create(win),
+                    $dom = require('jquery')(win),
                     // Create the CSS function stack for the async parallelization
                     cssFnStack = getCssFnStack(getCssUrls($dom, url));
 
