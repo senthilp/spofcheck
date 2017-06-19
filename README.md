@@ -1,7 +1,7 @@
 [![NPM](https://nodei.co/npm/spofcheck.png?downloads=true)](https://nodei.co/npm/spofcheck/)
 
 [![Build Status](https://secure.travis-ci.org/senthilp/spofcheck.png?branch=master)](https://travis-ci.org/senthilp/spofcheck)
-##SPOFCheck - Fighting Frontend [SPOF](http://en.wikipedia.org/wiki/Single_point_of_failure) at its root
+## SPOFCheck - Fighting Frontend [SPOF](http://en.wikipedia.org/wiki/Single_point_of_failure) at its root
 
 With the increase in 3rd party widgets and modernization of web applications, Frontend Single Point Of Failure (SPOF) has 
 become a critical focus point. Thanks to [Steve Souders](https://twitter.com/souders) for his 
@@ -28,7 +28,7 @@ Thanks to github projects [spof-o-matic](https://github.com/pmeenan/spof-o-matic
 a lot of the code logic has been re-used here. The design and packaging of the tool is based on [csslint](https://github.com/stubbornella/csslint), 
 thanks to [Nicholas Zakas](https://twitter.com/slicknet) and [Nicole Sullivan](https://twitter.com/stubbornella).
 
-##The command line interface
+## The command line interface
 SPOFCheck provides a simple command line interface and runs on Node.js 
 
 To install SPOFCheck run the following
@@ -51,7 +51,7 @@ Example
 
     $ spofcheck -f junit-xml -o /tests www.ebay.com www.amazon.com
 
-##Rules
+## Rules
 SPOFCheck by default runs with 5 rules (checks). The rules are maintained in the [rules.js](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js) 
 file. New rules can be easily added by pushing entries to the [rules](https://github.com/senthilp/spofcheck/blob/master/lib/rules.js#L6) 
 array or calling the spof api [registerRules](https://github.com/senthilp/spofcheck/blob/master/lib/engine.js#L142). The 
@@ -63,7 +63,7 @@ default rules come from Souders's original [list](http://www.stevesouders.com/bl
 1. `fontface-inline` - Make sure the fonts files are compressed, cached and small in size
 1. `fontface-inline-precede-script-IE` - Make sure inlined @font-face is not preceded by a SCRIPT tag, causes SPOF in IE
 
-##Output
+## Output
 SPOFCheck creates a file and writes results in one of the below formats
 * `junit-xml` - a format most CI servers can parse, the default format
 * `spof-xml` - an XML format that can be consumed by other utilities
@@ -72,7 +72,7 @@ SPOFCheck creates a file and writes results in one of the below formats
 The format can be specified using the `--format` or `-f` option. For just printing results i.e. no file creation, use the 
 `--print` or `-p` option
 
-##Programmable API
+## Programmable API
 SPOFCheck also provides a programmable API to be used along with build scripts like grunt. The API is called `run` which takes in a lits of URLs along with options (same options mentioned above) and returns a promise. The promise is either fulfilled with the SPOF analysis results or rejected with an error message.
 ```js
 var spofcheck = require('spofcheck');
@@ -120,19 +120,19 @@ The format of the results object is shown below
 ]
 ```
 
-##Testing
+## Testing
 The entire test suite for both, the Command Line Interface and programmable API is available in the main test file  [spofcheck.js](https://github.com/senthilp/spofcheck/blob/master/tests/spofcheck.js). For assertion the default Node.js [assert](https://npmjs.org/package/assert) module is used. To run the tests - clone the [repo](https://github.com/senthilp/spofcheck), 
 install the package `$ npm install` and run
 
     $ npm test
 
-##Issues
+## Issues
 Have a bug or a feature request? [Please open a new issue](https://github.com/senthilp/spofcheck/issues)
 
-##Authors
+## Authors
 **Senthil Padmanabhan** - [github](https://github.com/senthilp) | [twitter](https://twitter.com/senthil_hi)
 
-##License 
+## License 
 Copyright (c) 2012 eBay Inc.
 
 Released under the MIT License
