@@ -1,48 +1,48 @@
 {
-	  "name":"spofcheck",
-   	"description":"A CLI tool for detecting frontend SPOF",
-   	"version":"0.1.7",
-   	"keywords":[
-      	"SPOF",
-      	"Frontend SPOF",
-   	  	"SPOF Check",
-   	  	"spofcheck"
-   	],
-   	"main":"./bin/spofcheck.js",
-   	"homepage":"https://github.com/senthilp/spofcheck/blob/master/README.md",
-   	"contributors":[
-   		"Senthil Padmanabhan",
-   		"Venkat Sundramurthy"
-   	],
-   	"repository":{
-    	"type":"git",
-      	"url":"https://github.com/senthilp/spofcheck"
-   	},
-   	"licenses":[
-    	{
-    		"type":"MIT",
-         	"url":"https://github.com/senthilp/spofcheck/blob/master/LICENSE"
-      	}
-   	],
-   	"dependencies":{
-        "nopt": "2.0.0",
-        "request": "2.12.0",		
-        "async": "0.1.22",
-        "jsdom": "^9.8.3",
-        "jquery": "^3.1.1",
-        "mkdirp": "0.3.4",
-        "q": "~1.0.1"
-   	},
-   	"devDependencies": {
-   		"rimraf": "2.0.2"
-   	},
-   	"bin":{
-    	"spofcheck":"./bin/spofcheck.js"
-   	},
-   	"scripts": {
-   		"test": "node tests/spofcheck.js"
-   	},
-    "publishConfig": {
-      "registry": "https://registry.npmjs.org/"
-    }    
+ "name": "spofcheck",
+ "description": "A CLI tool for detecting frontend SPOF",
+ "version": "0.1.7",
+ "keywords": [
+  "SPOF",
+  "Frontend SPOF",
+  "SPOF Check",
+  "spofcheck"
+ ],
+ "main": "./bin/spofcheck.js",
+ "homepage": "https://github.com/senthilp/spofcheck/blob/master/README.md",
+ "contributors": [
+  "Senthil Padmanabhan",
+  "Venkat Sundramurthy"
+ ],
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/senthilp/spofcheck"
+ },
+ "licenses": [
+  {
+   "type": "MIT",
+   "url": "https://github.com/senthilp/spofcheck/blob/master/LICENSE"
+  }
+ ],
+ "dependencies": {
+  "nopt": "2.0.0",
+  "request": "^2.88.2",
+  "async": "0.1.22",
+  "jsdom": "^9.8.3",
+  "jquery": "^3.1.1",
+  "mkdirp": "0.3.4",
+  "q": "~1.0.1"
+ },
+ "devDependencies": {
+  "rimraf": "2.0.2"
+ },
+ "bin": {
+  "spofcheck": "./bin/spofcheck.js"
+ },
+ "scripts": {
+  "test": "node tests/spofcheck.js"
+ },
+ "publishConfig": {
+  "registry": "https://registry.npmjs.org/"
+ }
 }

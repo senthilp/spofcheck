@@ -3,7 +3,7 @@
  * Author: Senthil Padmanabhan
  *
  * Released under the MIT License
- * http://www.opensource.org/licenses/MIT
+ * https://www.opensource.org/licenses/MIT
  *
  * spofcheck.js
  *
@@ -32,9 +32,9 @@ exec('node bin/spofcheck', function(error, stdout) {
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: junit-xml
- * URL: http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html
+ * URL: https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html
  */
-exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -43,7 +43,7 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://senthilp.github.com/sp
         }
         var rule = 'Load 3rd Party JS Asynchronously',
             formatter = 'junit-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout),
@@ -56,9 +56,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts http://senthilp.github.com/sp
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: text
- * URL: http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html
+ * URL: https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html
  */
-exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -67,7 +67,7 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://senthilp.githu
         }
         var rule = 'Load 3rd Party JS Asynchronously',
             formatter = 'text',
-            url = 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout),
@@ -80,9 +80,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f text http://senthilp.githu
 /**
  * Rule: Load 3rd Party JS Asynchronously
  * Formatter: spof-xml
- * URL: http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html
+ * URL: https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html
  */
-exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -91,7 +91,7 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://senthilp.g
         }
         var rule = 'Load 3rd Party JS Asynchronously',
             formatter = 'spof-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout),
@@ -104,9 +104,9 @@ exec('node bin/spofcheck -p -q -r 3rdparty-scripts -f spof-xml http://senthilp.g
 /**
  * Rule: Load Application JS Non-blocking
  * Formatter: junit-xml
- * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
+ * URL: https://senthilp.github.io/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -p -q -r application-js http://senthilp.github.com/spofcheck/tests/application-js.html', {
+exec('node bin/spofcheck -p -q -r application-js https://senthilp.github.io/spofcheck/tests/application-js.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -115,7 +115,7 @@ exec('node bin/spofcheck -p -q -r application-js http://senthilp.github.com/spof
         }
         var rule = 'Load Application JS Non-blocking',
             formatter = 'junit-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/application-js.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout),
@@ -128,9 +128,9 @@ exec('node bin/spofcheck -p -q -r application-js http://senthilp.github.com/spof
 /**
  * Rule: Load Application JS Non-blocking
  * Formatter: text
- * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
+ * URL: https://senthilp.github.io/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -p -q -r application-js -f text http://senthilp.github.com/spofcheck/tests/application-js.html', {
+exec('node bin/spofcheck -p -q -r application-js -f text https://senthilp.github.io/spofcheck/tests/application-js.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -139,7 +139,7 @@ exec('node bin/spofcheck -p -q -r application-js -f text http://senthilp.github.
         }
         var rule = 'Load Application JS Non-blocking',
             formatter = 'text',
-            url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/application-js.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout),
@@ -152,9 +152,9 @@ exec('node bin/spofcheck -p -q -r application-js -f text http://senthilp.github.
 /**
  * Rule: Load Application JS Non-blocking
  * Formatter: spof-xml
- * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
+ * URL: https://senthilp.github.io/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.github.com/spofcheck/tests/application-js.html', {
+exec('node bin/spofcheck -p -q -r application-js -f spof-xml https://senthilp.github.io/spofcheck/tests/application-js.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -163,7 +163,7 @@ exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.git
         }
         var rule = 'Load Application JS Non-blocking',
             formatter = 'spof-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/application-js.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout),
@@ -176,9 +176,9 @@ exec('node bin/spofcheck -p -q -r application-js -f spof-xml http://senthilp.git
 /**
  * Rule: Stylesheet With @font-face
  * Formatter: junit-xml
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html
  */
-exec('node bin/spofcheck -p -q -r fontface-stylesheet http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', {
+exec('node bin/spofcheck -p -q -r fontface-stylesheet https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -187,7 +187,7 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet http://senthilp.github.com
         }
         var rule = 'Stylesheet With @font-face',
             formatter = 'junit-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout),
@@ -200,9 +200,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet http://senthilp.github.com
 /**
  * Rule: Stylesheet With @font-face
  * Formatter: text
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html
  */
-exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', {
+exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -211,7 +211,7 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://senthilp.gi
         }
         var rule = 'Stylesheet With @font-face',
             formatter = 'text',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout),
@@ -224,9 +224,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f text http://senthilp.gi
 /**
  * Rule: Stylesheet With @font-face
  * Formatter: spof-xml
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html
  */
-exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html', {
+exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -235,7 +235,7 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://senthil
         }
         var rule = 'Stylesheet With @font-face',
             formatter = 'spof-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-stylesheet.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-stylesheet.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout),
@@ -248,9 +248,9 @@ exec('node bin/spofcheck -p -q -r fontface-stylesheet -f spof-xml http://senthil
 /**
  * Rule: Inline @font-face
  * Formatter: junit-xml
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-inline.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline http://senthilp.github.com/spofcheck/tests/fontface-inline.html', {
+exec('node bin/spofcheck -p -q -r fontface-inline https://senthilp.github.io/spofcheck/tests/fontface-inline.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -259,7 +259,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline http://senthilp.github.com/spo
         }
         var rule = 'Inline @font-face',
             formatter = 'junit-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-inline.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout),
@@ -272,9 +272,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline http://senthilp.github.com/spo
 /**
  * Rule: Inline @font-face
  * Formatter: text
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-inline.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline -f text http://senthilp.github.com/spofcheck/tests/fontface-inline.html', {
+exec('node bin/spofcheck -p -q -r fontface-inline -f text https://senthilp.github.io/spofcheck/tests/fontface-inline.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -283,7 +283,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f text http://senthilp.github
         }
         var rule = 'Inline @font-face',
             formatter = 'text',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-inline.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout),
@@ -296,9 +296,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f text http://senthilp.github
 /**
  * Rule: Inline @font-face
  * Formatter: spof-xml
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-inline.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-inline.html', {
+exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml https://senthilp.github.io/spofcheck/tests/fontface-inline.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -307,7 +307,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.gi
         }
         var rule = 'Inline @font-face',
             formatter = 'spof-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-inline.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout),
@@ -320,9 +320,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline -f spof-xml http://senthilp.gi
 /**
  * Rule: Inline @font-face precede Script tag IE issue
  * Formatter: junit-xml
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', {
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -331,7 +331,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://senth
         }
         var rule = 'Inline @font-face precede Script tag IE issue',
             formatter = 'junit-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><testsuites>[\s\S]*?<\/testsuites>/.test(stdout),
@@ -344,9 +344,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE http://senth
 /**
  * Rule: Inline @font-face precede Script tag IE issue
  * Formatter: text
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', {
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -355,7 +355,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http
         }
         var rule = 'Inline @font-face precede Script tag IE issue',
             formatter = 'text',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/spof:[\s\S\n]*?Severity:[\s\S\n]*?Entity:[\s\S\n]*?Score:[\s\S\n]*?Fix:/.test(stdout),
@@ -368,9 +368,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f text http
 /**
  * Rule: Inline @font-face precede Script tag IE issue
  * Formatter: spof-xml
- * URL: http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html
+ * URL: https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html
  */
-exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html', {
+exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html', {
         "timeout": 20000
     },
     function(error, stdout) {
@@ -379,7 +379,7 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml 
         }
         var rule = 'Inline @font-face precede Script tag IE issue',
             formatter = 'spof-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/fontface-inline-precede-script-IE.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/fontface-inline-precede-script-IE.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(stdout !== '', 'Should print results for ' + message);
         assert(/<\?xml version="1.0" encoding="utf-8"\?><spof>[\s\S]*?<\/spof>/.test(stdout),
@@ -393,9 +393,9 @@ exec('node bin/spofcheck -p -q -r fontface-inline-precede-script-IE -f spof-xml 
  * Save to Disk, verifying --outputdir option
  * Rule: Load Application JS Non-blocking
  * Formatter: junit-xml
- * URL: http://senthilp.github.com/spofcheck/tests/application-js.html
+ * URL: https://senthilp.github.io/spofcheck/tests/application-js.html
  */
-exec('node bin/spofcheck -o dist/spof -q http://senthilp.github.com/spofcheck/tests/application-js.html', {
+exec('node bin/spofcheck -o dist/spof -q https://senthilp.github.io/spofcheck/tests/application-js.html', {
         "timeout": 20000
     },
     function(error) {
@@ -404,7 +404,7 @@ exec('node bin/spofcheck -o dist/spof -q http://senthilp.github.com/spofcheck/te
         }
         var rule = 'Load Application JS Non-blocking',
             formatter = 'junit-xml',
-            url = 'http://senthilp.github.com/spofcheck/tests/application-js.html',
+            url = 'https://senthilp.github.io/spofcheck/tests/application-js.html',
             message = 'Rule: ' + rule + ', Formatter: ' + formatter + ', URL: ' + url;
         assert(fs.existsSync('dist/spof'), 'dist/spof directory should be created for ' + message);
         assert(fs.existsSync('dist/spof/junit-xml.xml'), 'dist/spof/junit-xml.xml should be file created for ' + message);
@@ -430,7 +430,7 @@ spofcheck.run('www.invalidurlneverexists.com').then(function() {}, function(erro
 /**
  * Invalid format test
  */
-spofcheck.run('http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+spofcheck.run('https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html', {
     "format": "xml"
 }).then(function() {}, function(errorObj) {
     assert(/format/i.test(errorObj.message), 'Programmable API: Should output an unknown format error message');
@@ -439,7 +439,7 @@ spofcheck.run('http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html'
 /**
  * Invalid rule check
  */
-spofcheck.run('http://senthilp.github.com/spofcheck/tests/application-js.html', {
+spofcheck.run('https://senthilp.github.io/spofcheck/tests/application-js.html', {
     rules: ['invalid-rule']
 }).then(function() {}, function(errorObj) {
     assert(/invalid-rule/.test(errorObj.message), 'Programmable API: ' + errorObj.message);
@@ -448,7 +448,7 @@ spofcheck.run('http://senthilp.github.com/spofcheck/tests/application-js.html', 
 /**
  * Valid URL test for 3rdparty-scripts rule
  */
-spofcheck.run('http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', {
+spofcheck.run('https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html', {
     rules: ['3rdparty-scripts']
 }).then(function(results) {
     results[0].messages.forEach(function(message) {
@@ -459,6 +459,6 @@ spofcheck.run('http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html'
 /**
  * Multiple URL test for 3rdparty-scripts rule
  */
-spofcheck.run(['http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html', 'http://senthilp.github.com/spofcheck/tests/3rdparty-scripts.html']).then(function(results) {
+spofcheck.run(['https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html', 'https://senthilp.github.io/spofcheck/tests/3rdparty-scripts.html']).then(function(results) {
     assert(results.length === 2, 'Programmable API: Should have results for 2 URLs');
 }).done();
